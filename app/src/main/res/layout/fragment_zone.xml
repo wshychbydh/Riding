@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="我的"
+        android:textColor="@color/title"
+        android:textSize="@dimen/title_b"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/windowBackground">
+
+        <cool.eye.ridding.ui.ZoneHeadView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:isFillet="false"
+            app:src="@mipmap/ic_launcher"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_encode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_b"
+        android:text="生成二维码"/>
+
+    <TextView
+        android:id="@+id/tv_scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_b"
+        android:text="扫码"/>
+</LinearLayout>

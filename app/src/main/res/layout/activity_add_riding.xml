@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_riding"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.RidingAddActivity">
+
+    <include
+        android:id="@+id/title_layout"
+        layout="@layout/common_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_layout"
+        android:layout_marginTop="@dimen/margin_b"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_b">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓        名："
+                android:textColor="@color/title"
+                android:textSize="@dimen/content_b"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/passenger_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:inputType="text"
+                android:lines="1"
+                android:text="乘客"
+                android:textColor="@color/content"
+                android:textSize="@dimen/content_b"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓        别："
+                android:textColor="@color/title"
+                android:textSize="@dimen/content_b"/>
+
+            <RadioGroup
+                android:id="@+id/radiogroup_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_b"
+                    android:text="女"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_b"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="出发地址："
+                android:textColor="@color/title"
+                android:textSize="@dimen/content_b"/>
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/start_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:inputType="text"
+                android:lines="1"
+                android:textColor="@color/content"
+                android:textSize="@dimen/content_b"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_b"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="目的地址："
+                android:textColor="@color/title"
+                android:textSize="@dimen/content_b"/>
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/end_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:inputType="text"
+                android:lines="1"
+                android:textColor="@color/content"
+                android:textSize="@dimen/content_b"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_b"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="出发时间："
+                android:textColor="@color/title"
+                android:textSize="@dimen/content_b"/>
+
+            <TextView
+                android:id="@+id/start_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:textColor="@color/content"
+                android:textSize="@dimen/content_b"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_b"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人        数："
+                android:textColor="@color/title"
+                android:textSize="@dimen/content_b"/>
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/people_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:dropDownSelector="@drawable/selector_btn"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/content"
+                android:textSize="@dimen/content_b"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_b"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电　　话："
+                android:textColor="@color/title"
+                android:textSize="@dimen/content_b"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:inputType="phone"
+                android:lines="1"
+                android:maxLength="11"
+                android:textColor="@color/content"
+                android:textSize="@dimen/content_b"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_b"
+            android:text="备        注："
+            android:textColor="@color/title"
+            android:textSize="@dimen/content_b"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/mark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small"
+            android:inputType="text"
+            android:maxLines="3"
+            android:maxLength="50"
+            android:textColor="@color/content"
+            android:textSize="@dimen/content_b"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin"
+        android:text="提交"/>
+</RelativeLayout>
