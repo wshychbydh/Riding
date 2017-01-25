@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorPrimaryDark"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:src="@mipmap/riding"/>
+
+            <cool.eye.ridding.login.support.ClearableEditText
+                android:id="@+id/et_username"
+                android:layout_width="260dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="55dp"
+                android:background="@drawable/shape_circle_corner_white"
+                android:drawableLeft="@drawable/ic_zhanghutixi_user"
+                android:drawablePadding="@dimen/padding_m"
+                android:hint="@string/account_username_hint"
+                android:imeOptions="actionNext"
+                android:inputType="textCapCharacters"
+                android:paddingLeft="@dimen/padding_m"
+                android:paddingRight="@dimen/padding_m"
+                app:clearIconClipParentPadding="true"
+                app:clearIconDivision="true"
+                app:clearIconDrawable="@drawable/icon_cancel"
+                app:clearIconGravity="right|center_vertical"
+                app:clearIconPadding="@dimen/margin_large"/>
+
+
+            <cool.eye.ridding.login.support.PasswordEditText
+                android:id="@+id/et_password"
+                android:layout_width="260dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_circle_corner_white"
+                android:drawableLeft="@drawable/ic_zhanghutixi_lock"
+                android:drawablePadding="@dimen/padding_m"
+                android:hint="@string/account_password_hint"
+                android:imeActionLabel="@string/account_login"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:minHeight="44dp"
+                android:paddingLeft="@dimen/padding_m"
+                android:paddingRight="@dimen/padding_m"
+                app:clipParentPadding="true"
+                app:division="true"
+                app:gravity="right|center_vertical"
+                app:hideDrawable="@drawable/ic_zhanghutixi_visible"
+                app:padding="@dimen/margin_large"
+                app:showDrawable="@drawable/ic_zhanghutixi_visible_on"/>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="260dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn_border_white"
+                android:text="@string/account_login"
+                android:textColor="@color/selector_green_text"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

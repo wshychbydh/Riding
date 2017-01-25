@@ -1,5 +1,6 @@
 <resources>
 
+    <dimen name="margin_large">20dp</dimen>
     <dimen name="margin_b">12dp</dimen>
     <dimen name="margin">8dp</dimen>
     <dimen name="margin_s">6dp</dimen>

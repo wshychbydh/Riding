@@ -18,4 +18,37 @@
         <attr name="isFillet" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="ClearableEditText">
+        <attr name="clearIconDrawable" format="reference" />
+        <attr name="clearIconPadding" format="dimension" />
+        <attr name="clearIconGravity">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+            <flag name="center_horizontal" value="0x01" />
+            <flag name="center" value="0x11" />
+        </attr>
+        <attr name="clearIconClipParentPadding" format="boolean" />
+        <attr name="clearIconDivision" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PasswordEditText">
+        <attr name="showDrawable" format="reference" />
+        <attr name="hideDrawable" format="reference" />
+        <attr name="padding" format="dimension" />
+        <attr name="gravity">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+            <flag name="center_horizontal" value="0x01" />
+            <flag name="center" value="0x11" />
+        </attr>
+        <attr name="clipParentPadding" format="boolean" />
+        <attr name="division" format="boolean" />
+    </declare-styleable>
+
 </resources>

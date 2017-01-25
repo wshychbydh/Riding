@@ -6,7 +6,7 @@
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
-    <include layout="@layout/common_title"/>
+    <include layout="@layout/dialog_common_title"/>
 
     <DatePicker
         android:id="@+id/date_picker"
@@ -18,11 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/sure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/selector_btn"
+        style="@style/style_button_border"
+        android:layout_width="match_parent"
+        android:layout_margin="30dp"
         android:text="确定"/>
 </LinearLayout>

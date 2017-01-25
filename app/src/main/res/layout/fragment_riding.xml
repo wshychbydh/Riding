@@ -8,36 +8,127 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="今日乘客"
-            android:textColor="@color/title"
-            android:textSize="@dimen/title_b"/>
+            android:background="@color/colorPrimaryDark">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="今日乘客"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_b"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/carry_finished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin"
+                android:text="完成"
+                android:textColor="@color/selector_white_text"/>
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/people_total"
+            android:id="@+id/riding_status_tv"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center"
-            android:textSize="40dp"
+            android:textColor="@color/white"
+            android:textSize="20dp"
             android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:id="@+id/carry_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/margin"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/carry_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/content_b"/>
+
+            <TextView
+                android:id="@+id/carry_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/carry_address"/>
+
+            <TextView
+                android:id="@+id/carry_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/carry_time"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_toRightOf="@id/carry_time"/>
+
+            <TextView
+                android:id="@+id/carry_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/carry_price"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_toRightOf="@id/carry_price"/>
+
+            <TextView
+                android:id="@+id/carry_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/carry_time"/>
+
+            <TextView
+                android:id="@id/carry_mark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/carry_phone"
+                android:layout_toLeftOf="@+id/carry_change"/>
+
+            <TextView
+                android:id="@+id/carry_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawablePadding="@dimen/padding_m"
+                android:drawableRight="@drawable/icon_arrow"
+                android:gravity="center"
+                android:text="更换"
+                android:textColor="@color/selector_green_text"
+                android:textSize="@dimen/content_b"/>
+        </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/riding_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@color/white"/>
 
-        <Button
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/riding_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_gravity="center_horizontal"
-            android:text="添加"/>
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@drawable/bg_btn_border_green"
+            android:paddingBottom="@dimen/margin"
+            android:paddingLeft="@dimen/margin_b"
+            android:paddingRight="@dimen/margin_b"
+            android:paddingTop="@dimen/margin"
+            android:text="添加乘客"
+            android:textColor="@color/white"/>
+
     </LinearLayout>
 </ScrollView>

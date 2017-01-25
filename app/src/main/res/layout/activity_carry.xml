@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_add_riding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/windowBackground"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="发布车源"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_b"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/padding">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="出发地址："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/carry_start_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/stat_address_input"
+            android:inputType="text"
+            android:lines="1"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/carry_start_address_common"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding"
+            android:paddingBottom="@dimen/margin"
+            android:paddingTop="@dimen/margin"
+            android:text="常用地址"
+            android:textColor="@color/selector_green_text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/padding">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="目的地址："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/carry_end_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/end_address_input"
+            android:inputType="text"
+            android:lines="1"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/carry_end_address_common"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding"
+            android:paddingBottom="@dimen/margin"
+            android:paddingTop="@dimen/margin"
+            android:text="常用地址"
+            android:textColor="@color/selector_green_text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding"
+        android:layout_marginTop="@dimen/margin"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/padding">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="出发时间："/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/carry_go_off"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/time_input"
+            android:textColor="@color/content"
+            android:textSize="@dimen/content"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/padding">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="人　　数："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/carry_people_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="phone"
+            android:minWidth="50dp"
+            android:paddingLeft="@dimen/margin"
+            android:paddingRight="@dimen/margin"
+            android:text="4"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="人"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/padding">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="价　　格："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/carry_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:lines="1"
+            android:minWidth="50dp"
+            android:paddingLeft="@dimen/margin"
+            android:paddingRight="@dimen/margin"
+            android:text="60"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元/人"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/padding">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="电　　话："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/carry_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:lines="1"
+            android:maxLength="11"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/padding">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="备        注："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/carry_mark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/mark_input"
+            android:inputType="textMultiLine"
+            android:gravity="top|left"
+            android:lines="3"
+            android:maxLength="150"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/carry_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/bg_btn_border_green"
+        android:text="保存"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/title"/>
+</LinearLayout>

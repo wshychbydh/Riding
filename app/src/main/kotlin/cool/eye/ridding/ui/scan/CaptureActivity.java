@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -57,6 +58,8 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
+        TextView titleTv = (TextView) findViewById(R.id.tv_title);
+        titleTv.setText("扫描二维码");
         previewSv = (SurfaceView) findViewById(R.id.sv_preview);
         captureView = (CaptureView) findViewById(R.id.cv_capture);
         flashCb = (CheckBox) findViewById(R.id.cb_capture_flash);

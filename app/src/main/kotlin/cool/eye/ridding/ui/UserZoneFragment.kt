@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cn.bmob.v3.BmobUser
 import cool.eye.ridding.R
+import cool.eye.ridding.login.ui.LoginActivity
 import cool.eye.ridding.ui.scan.CaptureActivity
 import cool.eye.ridding.ui.scan.QrEncodeActivity
 import kotlinx.android.synthetic.main.fragment_zone.*
@@ -24,5 +26,10 @@ class UserZoneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         tv_encode.setOnClickListener { startActivity(Intent(activity, QrEncodeActivity::class.java)) }
         tv_scan.setOnClickListener { startActivity(Intent(activity, CaptureActivity::class.java)) }
+        logout.setOnClickListener {
+            BmobUser.logOut()
+            startActivity(Intent(activity, LoginActivity::class.java))
+            activity.finish()
+        }
     }
 }

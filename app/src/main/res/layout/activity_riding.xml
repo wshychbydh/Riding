@@ -5,36 +5,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    <RadioGroup android:id="@+id/radiogroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-        <RadioButton android:layout_width="0dp"
-                     android:layout_height="wrap_content"
-                     android:layout_weight="1"
-                     android:background="@drawable/selector_btn"
-                     android:button="@null"
-                     android:gravity="center"
-                     android:padding="@dimen/margin_b"
-                     android:text="本次"/>
-        <RadioButton android:layout_width="0dp"
-                     android:layout_height="wrap_content"
-                     android:layout_weight="1"
-                     android:background="@drawable/selector_btn"
-                     android:button="@null" android:gravity="center"
-                     android:padding="@dimen/margin_b"
-                     android:text="历史"/>
-        <RadioButton android:layout_width="0dp"
-                     android:layout_height="wrap_content"
-                     android:layout_weight="1"
-                     android:background="@drawable/selector_btn"
-                     android:button="@null" android:gravity="center"
-                     android:padding="@dimen/margin_b"
-                     android:text="我的"/>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_green"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/margin_b"
+            android:text="本次"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_green"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/margin_b"
+            android:text="历史"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_green"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/margin_b"
+            android:text="我的"
+            android:textColor="@color/white"/>
     </RadioGroup>
 </LinearLayout>

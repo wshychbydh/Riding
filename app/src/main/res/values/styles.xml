@@ -2,10 +2,74 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!--Window Style-->
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <!--Widget Style-->
+        <item name="android:listViewStyle">@style/Widget.Client.ListView</item>
+        <item name="android:scrollViewStyle">@style/Widget.Client.ScrollView</item>
+        <item name="android:editTextStyle">@style/Widget.Client.EditText</item>
+        <item name="editTextStyle">@style/Widget.Client.EditText</item>
+        <item name="android:textViewStyle">@style/Widget.Client.TextView</item>
+        <item name="android:buttonStyle">@style/Widget.Client.Button</item>
+
+        <item name="android:screenOrientation">portrait</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- 防止当status栏的背景色和view/titlebar/actionbar一致时中间多出了一条黑线 -->
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Widget.Client.ScrollView" parent="android:Widget.Holo.ScrollView">
+        <item name="android:fadingEdge">none</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+    </style>
+
+    <style name="Widget.Client.ListView" parent="android:Widget.Holo.ListView">
+        <item name="android:drawSelectorOnTop">true</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:divider">@color/line_gray</item>
+        <item name="android:headerDividersEnabled">true</item>
+        <item name="android:footerDividersEnabled">true</item>
+        <item name="android:dividerHeight">1px</item>
+        <item name="android:listSelector">@drawable/list_selector_holo_light</item>
+    </style>
+
+    <style name="Widget.Client.TextView" parent="android:Widget.Holo.TextView">
+        <item name="android:textSize">@dimen/content</item>
+        <item name="android:textColor">@color/content</item>
+    </style>
+
+    <style name="Widget.Client.EditText" parent="android:Widget.Holo.EditText">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/title</item>
+        <item name="android:textSize">@dimen/content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <style name="Widget.Client.Button" parent="android:Widget.Holo.Light.Button">
+        <item name="android:textSize">@dimen/content_b</item>
+    </style>
+
+    <style name="Widget.Client.Button.Green">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bg_btn_border_green</item>
+    </style>
+
+    <style name="Widget.Client.Button.White">
+        <item name="android:textColor">@color/title</item>
+        <item name="android:background">@drawable/bg_btn_border_white</item>
     </style>
 
     <style name="alert_dialog" parent="android:Theme.Dialog">
@@ -34,4 +98,50 @@
         <item name="android:windowEnterAnimation">@anim/slide_fade_in_right</item>
         <item name="android:windowExitAnimation">@anim/dialog_out_right</item>
     </style>
+
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
+    <style name="CustomProgressDialog" parent="@style/CustomDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--popup from bottom-->
+    <style name="PopupWindowAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/anim_out_bottom</item>
+    </style>
+
+    <style name="style_button_border">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_btn_border_green</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/margin</item>
+        <item name="android:paddingBottom">@dimen/margin</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/content_b</item>
+    </style>
+
+    <style name="style_text_head">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/margin</item>
+        <item name="android:paddingRight">@dimen/margin</item>
+        <item name="android:paddingBottom">@dimen/margin</item>
+    </style>
+
+    <style name="divider_line_1px">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@drawable/divider_gray</item>
+    </style>
+
 </resources>

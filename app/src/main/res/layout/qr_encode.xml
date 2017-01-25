@@ -2,27 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:fitsSystemWindows="true"
               android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
 
     <EditText
         android:id="@+id/create_qr_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <CheckBox
-        android:id="@+id/create_qr_addLogo"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="显示logo"/>
+        android:layout_margin="@dimen/margin"
+        android:background="@color/white"
+        android:hint="请输入二维码内容"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:padding="@dimen/padding"/>
 
-    <Button
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/create_qr_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/margin"
+            android:text="显示图片"/>
+
+        <cool.eye.ridding.ui.StatedImageView
+            android:id="@+id/icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:background="@drawable/bg_btn_border_green"
+            android:src="@mipmap/ic_launcher"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/create_qr_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="生成二维码"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@drawable/bg_btn_border_green"
+        android:padding="@dimen/margin"
+        android:text="生成二维码"
+        android:textColor="@color/white"/>
 
     <ImageView
         android:id="@+id/create_qr_iv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_large"/>
 </LinearLayout>

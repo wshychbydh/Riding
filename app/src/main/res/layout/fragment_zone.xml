@@ -9,35 +9,54 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_centerInParent="true"
+        android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="我的"
-        android:textColor="@color/title"
+        android:textColor="@color/white"
         android:textSize="@dimen/title_b"/>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="@color/windowBackground">
+        android:background="@color/colorPrimaryDark">
 
         <cool.eye.ridding.ui.ZoneHeadView
+            android:id="@+id/head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:isFillet="false"
-            app:src="@mipmap/ic_launcher"/>
+            app:src="@mipmap/riding"/>
     </FrameLayout>
 
     <TextView
         android:id="@+id/tv_encode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@drawable/bg_btn_white"
+        android:drawableRight="@drawable/icon_arrow"
         android:padding="@dimen/margin_b"
         android:text="生成二维码"/>
+
+    <View style="@style/divider_line_1px"/>
 
     <TextView
         android:id="@+id/tv_scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_white"
+        android:drawableRight="@drawable/icon_arrow"
         android:padding="@dimen/margin_b"
         android:text="扫码"/>
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@drawable/bg_btn_white"
+        android:gravity="center"
+        android:padding="@dimen/margin_b"
+        android:text="注销"/>
 </LinearLayout>

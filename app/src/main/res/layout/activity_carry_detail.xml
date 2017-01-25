@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+
+    <TextView
+        android:id="@+id/people_total"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:id="@+id/carry_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/margin"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/carry_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title"
+            android:textSize="@dimen/content_b"/>
+
+        <TextView
+            android:id="@+id/carry_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/carry_address"/>
+
+        <TextView
+            android:id="@+id/carry_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/carry_time"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_toRightOf="@id/carry_time"/>
+
+        <TextView
+            android:id="@+id/carry_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/carry_price"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_toRightOf="@id/carry_price"/>
+
+        <TextView
+            android:id="@+id/carry_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/carry_time"/>
+
+        <TextView
+            android:id="@id/carry_mark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/carry_phone"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/carry_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <cool.eye.ridding.ui.EmptyView
+            android:id="@+id/carry_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+</LinearLayout>

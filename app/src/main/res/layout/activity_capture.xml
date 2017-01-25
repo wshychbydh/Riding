@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:id="@+id/root_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true">
 
     <SurfaceView
         android:id="@+id/sv_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"/>
 
     <RelativeLayout
         android:id="@+id/layout_capture"
@@ -20,7 +21,7 @@
             android:id="@+id/cv_capture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"/>
 
         <Button
             android:id="@+id/btn_album"
@@ -34,7 +35,7 @@
             android:gravity="center"
             android:text="@string/capture_album"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
 
         <CheckBox
@@ -44,7 +45,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
-            android:button="@drawable/barcode_flashlight_selector" />
+            android:button="@drawable/barcode_flashlight_selector"/>
 
     </RelativeLayout>
 

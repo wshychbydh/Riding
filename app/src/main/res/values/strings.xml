@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Ridding</string>
 
+    <string name="account_username_hint">请输入用户名</string>
+    <string name="account_password_hint">请输入密码</string>
+    <string name="account_password_6_14">请输入6-14位的密码</string>
+    <string name="account_login">登录</string>
+    <string name="login_success">登录成功</string>
+
     <string name="capture_camera_failed">Camera disabled</string>
     <string name="capture_hint">Put the qrcode in frame</string>
     <string name="capture_flash">flash</string>
@@ -12,4 +18,26 @@
     <string name="capture_decode_result_open">Open</string>
     <string name="capture_decode_result_copy">Copy</string>
     <string name="capture_decode_result_copy_hint">Already copy!</string>
+    <string name="stat_address_input">点击输入出发地址</string>
+    <string name="end_address_input">点击输入目的地址</string>
+    <string name="time_input">点击选择出发时间</string>
+    <string name="mark_input">点击输入备注</string>
+    <string name="phone_input">点击输入电话号码</string>
+    <string name="data_none">暂无数据</string>
+    <string name="passenger_add">添加乘客</string>
+    <string name="name_empty">名字不能为空</string>
+    <string name="start_address_empty">出发地址不能为空</string>
+    <string name="end_address_empty">目的地址不能为空</string>
+    <string name="phone_empty">电话号码不能为空</string>
+    <string name="unkonw_error">未知错误</string>
+    <string name="go_off_empty">出发时间不能为空</string>
+    <string name="riding_count_empty">载客人数不能为空</string>
+    <string name="price_empty">价格不能为空</string>
+    <string name="passenger_empty">暂无乘客，请添加！</string>
+    <string name="passenger_add_succeed">添加乘客成功</string>
+    <string name="usual_address">常用地址</string>
+    <string name="time_select">选择时间</string>
+    <string name="carry_add_succeed">添加车源成功</string>
+    <string name="carry_update_succeed">更新车源成功</string>
+
 </resources>

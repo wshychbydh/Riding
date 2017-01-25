@@ -13,24 +13,29 @@
     <color name="content">#99000000</color>
 
     <!-- 用于LOGO、顶部标题栏、按钮、图标、文字-->
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#0AB667</color>
+    <color name="colorPrimary_press">#7a0AB667</color>
     <!-- 用于按钮、图标、箭头-->
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryDark">#08A948</color>
+    <color name="colorAccent">#0AB667</color>
     <!-- 用于页面背景-->
     <color name="windowBackground">#F3F3F3</color>
 
     <!-- 用于图标、按钮-->
-    <color name="sdy_blue">#1592EA</color>
+    <color name="blue">#1592EA</color>
     <!-- 用于图标、按钮-->
-    <color name="sdy_orange">#FF8400</color>
+    <color name="orange">#FF8400</color>
     <!-- 用于警告、提示-->
-    <color name="sdy_red">#FD1F43</color>
+    <color name="red">#FD1F43</color>
     <!-- 用于重要级别文字，内页标题信息-->
-    <color name="sdy_black">#454545</color>
+    <color name="black">#454545</color>
     <!-- 普通级文字信息，图标-->
-    <color name="sdy_deep_gray">#969696</color>
+    <color name="deep_gray">#969696</color>
     <!-- 线条，线框-->
-    <color name="sdy_gray">#E5E5E5</color>
-    <color name="sdy_white">#FFFFFF</color>
+    <color name="gray">#E5E5E5</color>
+
+    <color name="line_gray">#C9C9C9</color>
+    <!--Deawable-->
+    <drawable name="bg_transparent">@android:color/transparent</drawable>
+    <color name="yellow">#fa6860</color>
 </resources>
