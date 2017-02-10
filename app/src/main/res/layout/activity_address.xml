@@ -8,7 +8,7 @@
 
     <include layout="@layout/common_title"/>
 
-    <cool.eye.ridding.ui.RefreshViewGroup
+    <cool.eye.ridding.ui.EmptyRecyclerView
         android:id="@+id/address_refreshview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

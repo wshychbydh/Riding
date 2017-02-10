@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.common_title.*
 class AddressActivity : BaseActivity() {
 
     lateinit var view: View
-    lateinit var refreshView: RefreshViewGroup<Address>
+    lateinit var refreshView: EmptyRecyclerView<Address>
 
     companion object {
         const val REQUEST_CODE = 1001
@@ -34,13 +34,9 @@ class AddressActivity : BaseActivity() {
         setContentView(R.layout.activity_address)
         iv_back.setOnClickListener { finish() }
         tv_title.text = getString(R.string.usual_address)
-        refreshView = address_refreshview as RefreshViewGroup<Address>
+        refreshView = address_refreshview as EmptyRecyclerView<Address>
         refreshView.setAdapter(AddressAdapter(refreshView.dataList))
         refreshView.setEmptyView(EmptyView(this))
-        refreshView.onRefresh = {
-            //TODO 暂时不需要刷新功能
-            refreshView.onLoadComplete()
-        }
         getAddress()
     }
 

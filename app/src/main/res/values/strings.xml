@@ -3,9 +3,13 @@
 
     <string name="account_username_hint">请输入用户名</string>
     <string name="account_password_hint">请输入密码</string>
+    <string name="account_password_hint2">请再输入密码</string>
     <string name="account_password_6_14">请输入6-14位的密码</string>
+    <string name="account_password_different">两次输入的密码不一致</string>
     <string name="account_login">登录</string>
-    <string name="login_success">登录成功</string>
+    <string name="account_register">注册</string>
+    <string name="account_login_success">登录成功</string>
+    <string name="account_register_success">注册成功</string>
 
     <string name="capture_camera_failed">Camera disabled</string>
     <string name="capture_hint">Put the qrcode in frame</string>
@@ -25,19 +29,43 @@
     <string name="phone_input">点击输入电话号码</string>
     <string name="data_none">暂无数据</string>
     <string name="passenger_add">添加乘客</string>
+    <string name="passenger_take_count">已载 %1$d 人</string>
     <string name="name_empty">名字不能为空</string>
+    <string name="sex_empty">请选择性别</string>
     <string name="start_address_empty">出发地址不能为空</string>
     <string name="end_address_empty">目的地址不能为空</string>
-    <string name="phone_empty">电话号码不能为空</string>
+    <string name="phone_empty">请输入有效的电话号码</string>
     <string name="unkonw_error">未知错误</string>
     <string name="go_off_empty">出发时间不能为空</string>
     <string name="riding_count_empty">载客人数不能为空</string>
     <string name="price_empty">价格不能为空</string>
     <string name="passenger_empty">暂无乘客，请添加！</string>
-    <string name="passenger_add_succeed">添加乘客成功</string>
+    <string name="riding_add_succeed">添加乘车成功</string>
+    <string name="riding_update_succeed">更新乘车成功</string>
     <string name="usual_address">常用地址</string>
     <string name="time_select">选择时间</string>
     <string name="carry_add_succeed">添加车源成功</string>
     <string name="carry_update_succeed">更新车源成功</string>
+    <string name="contacts">通讯录</string>
+    <string name="black_list">黑名单</string>
+    <string name="card_text">我的文本</string>
+    <string name="card_image">我的名片</string>
+    <string name="scan">扫二维码</string>
+    <string name="logout">注销</string>
+    <string name="mine">我的</string>
+    <string name="passenger">乘客</string>
+    <string name="by_count">已乘%1$d次</string>
+    <string name="card_content_input">请输入名片内容</string>
+    <string name="pick_share_method">选择分享方式</string>
+
+    <string name="qr_code">我的二维码</string>
+    <string name="car_submit">发布车源</string>
+    <string name="select_what_you_do">请选择你要执行的操作</string>
+    <string name="blacklist">黑名单</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
+    <string name="blacklist_add_succeed">已加入黑名单</string>
+    <string name="delect_succeed">删除成功</string>
+    <string name="car_submit_none">你还未发布车源信息</string>
 
 </resources>

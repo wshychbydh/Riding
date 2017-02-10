@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_carry.*
  */
 class CarryFragment : BaseFragment() {
 
-    lateinit var refreshView: RefreshViewGroup<CarryInfo>
+    lateinit var refreshView: EmptyRecyclerView<CarryInfo>
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater?.inflate(R.layout.fragment_carry, container, false)
@@ -29,13 +29,9 @@ class CarryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        refreshView = carry_refreshview as RefreshViewGroup<CarryInfo>
+        refreshView = carry_refreshview as EmptyRecyclerView<CarryInfo>
         refreshView.setAdapter(RecyclerAdapter(refreshView.dataList))
         refreshView.setEmptyView(EmptyView(context))
-        refreshView.onRefresh = {
-            //TODO 暂时不需要刷新功能
-            refreshView.onLoadComplete()
-        }
         getCarryInfo()
     }
 
@@ -44,13 +40,13 @@ class CarryFragment : BaseFragment() {
         var query = BmobQuery<CarryInfo>()
         query.addWhereEqualTo("status", 1)
         query.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
+        query.order("-updatedAt,-createdAt")
         query.findObjects(object : FindListener<CarryInfo>() {
             override fun done(p0: MutableList<CarryInfo>?, p1: BmobException?) {
                 if (p1 == null) {
                     if (p0?.isNotEmpty() ?: false) {
                         refreshView.onLoadData(p0!!)
                     }
-                    refreshView.onLoadComplete()
                 } else {
                     toast(p1.message ?: "")
                 }
@@ -83,7 +79,7 @@ class CarryFragment : BaseFragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CarryViewHolder {
-            return CarryViewHolder(LayoutInflater.from(context).inflate(R.layout.carry_item, parent,false))
+            return CarryViewHolder(LayoutInflater.from(context).inflate(R.layout.carry_item, parent, false))
         }
 
         var onItemClicked = View.OnClickListener { v ->

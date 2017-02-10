@@ -14,7 +14,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/title_b"/>
 
-    <cool.eye.ridding.ui.RefreshViewGroup
+    <cool.eye.ridding.ui.EmptyRecyclerView
         android:id="@+id/carry_refreshview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

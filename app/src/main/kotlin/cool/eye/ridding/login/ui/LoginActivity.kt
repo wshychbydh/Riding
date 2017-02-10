@@ -1,5 +1,6 @@
 package cool.eye.ridding.login.ui
 
+import android.content.Intent
 import android.os.Bundle
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
@@ -17,8 +18,10 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        tv_title.text = "登录"
+        iv_back.setOnClickListener { finish() }
+        tv_title.text = getString(R.string.account_login)
         btn_login.setOnClickListener { login() }
+        tv_register.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
     }
 
     fun login() {
@@ -33,7 +36,7 @@ class LoginActivity : BaseActivity() {
                     if (p1 == null) {
                         //通过BmobUser user = BmobUser.getCurrentUser()获取登录成功后的本地用户信息
                         //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(MyUser.class)获取自定义用户信息
-                        toast(getString(R.string.login_success))
+                        toast(getString(R.string.account_login_success))
                         HomeActivity.launch(this@LoginActivity, 0)
                     } else {
                         toast(p1?.message ?: "")

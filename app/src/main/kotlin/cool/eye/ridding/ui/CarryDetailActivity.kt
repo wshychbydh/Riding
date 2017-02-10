@@ -50,6 +50,7 @@ class CarryDetailActivity : BaseActivity() {
         startProgressDialog()
         var query = BmobQuery<Riding>()
         query.addWhereEqualTo("carryId", carryInfo.objectId)
+        query.include("passenger")
         query.findObjects(object : FindListener<Riding>() {
             override fun done(p0: MutableList<Riding>?, p1: BmobException?) {
                 stopProgressDialog()
@@ -64,7 +65,7 @@ class CarryDetailActivity : BaseActivity() {
         })
     }
 
-    fun showCarryInfo(){
+    fun showCarryInfo() {
         carry_layout.visibility = View.VISIBLE
         carry_address.text = carryInfo.composeAddress()
         carry_time.text = carryInfo.goOffTime
@@ -77,11 +78,10 @@ class CarryDetailActivity : BaseActivity() {
 
     fun updatePeopleCount(ridingList: MutableList<Riding>?) {
         var peopleCount = 0
-        ridingList?.forEach { riding -> peopleCount + riding.peopleCount }
-        var content1 = "预载${carryInfo.peopleCount}人"
-        var content2 = "实载${peopleCount}人"
-        var color = resources.getColor(R.color.yellow)
-        people_total.text = "${Utils.formatColorOfStr(content1, color, 2, 3)},${Utils.formatColorOfStr(content2, color, 2, 3)}"
+        ridingList?.forEach { riding -> peopleCount = +riding.peopleCount }
+        var content = "预载 ${carryInfo.peopleCount} 人，实载 $peopleCount 人"
+        var color = resources.getColor(R.color.orange)
+        people_total.text = Utils.formatColorOfStr(content, color, 10, 11)
     }
 
     inner class RidingAdapter(var ridingList: MutableList<Riding>) : RecyclerView.Adapter<RidingHolder>() {
@@ -99,6 +99,8 @@ class CarryDetailActivity : BaseActivity() {
             holder.view.riding_item_call.setOnClickListener {
                 Utils.callPhone(baseContext, ridingList[position].passenger!!.phone)
             }
+            holder.view.riding_item_mark_layout.visibility = if (ridingList[position].mark.isNullOrEmpty()) View.GONE else View.VISIBLE
+            holder.view.riding_item_mark.text = ridingList[position].mark
         }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RidingHolder {

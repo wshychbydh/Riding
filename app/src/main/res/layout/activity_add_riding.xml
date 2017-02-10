@@ -7,256 +7,360 @@
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
     android:orientation="vertical"
-    tools:context=".ui.RidingAddActivity">
+    tools:context=".zone.contacts.RidingAddActivity">
 
     <include
         android:id="@+id/title_layout"
         layout="@layout/common_title"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="姓        名："/>
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/passenger_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
-            android:lines="1"
-            android:text="乘客"/>
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+            <View
+                style="@style/divider_line_1px"
+                android:layout_marginTop="@dimen/margin"/>
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="姓        别："/>
-
-        <RadioGroup
-            android:id="@+id/radiogroup_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatRadioButton
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="男"
-                android:textColor="@color/content"/>
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
 
-            <android.support.v7.widget.AppCompatRadioButton
-                android:layout_width="wrap_content"
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="姓        名："/>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/passenger_name"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text="乘客"/>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/passenger_job"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:hint="职业"
+                    android:inputType="text"
+                    android:lines="1"/>
+            </LinearLayout>
+
+            <View style="@style/divider_line_1px"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_b"
-                android:text="女"
-                android:textColor="@color/content"/>
-        </RadioGroup>
-    </LinearLayout>
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="姓        别："/>
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="出发地址："/>
+                <RadioGroup
+                    android:id="@+id/radiogroup_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/start_address"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="@string/stat_address_input"
-            android:inputType="text"
-            android:lines="1"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="男"
+                        android:textColor="@color/content"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/start_address_common"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding"
-            android:paddingBottom="@dimen/margin"
-            android:paddingTop="@dimen/margin"
-            android:text="常用地址"
-            android:textColor="@color/selector_green_text"/>
-    </LinearLayout>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_b"
+                        android:text="女"
+                        android:textColor="@color/content"/>
+                </RadioGroup>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/passenger_age"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:gravity="center"
+                    android:hint="年龄"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="2"/>
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="目的地址："/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/content_s"
+                    android:text="岁"/>
+            </LinearLayout>
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/end_address"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="@string/end_address_input"
-            android:inputType="text"
-            android:lines="1"/>
+            <View style="@style/divider_line_1px"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/end_address_common"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding"
-            android:paddingBottom="@dimen/margin"
-            android:paddingTop="@dimen/margin"
-            android:text="常用地址"
-            android:textColor="@color/selector_green_text"/>
-    </LinearLayout>
+            <View
+                style="@style/divider_line_1px"
+                android:layout_marginTop="@dimen/margin"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="出发时间："/>
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/ridding_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="点击选择时间"
-            android:textColor="@color/content"
-            android:textSize="@dimen/content_b"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="出发地址："/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/start_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/stat_address_input"
+                    android:inputType="text"
+                    android:lines="1"/>
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="人        数："/>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/start_address_common"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:paddingBottom="@dimen/margin"
+                    android:paddingTop="@dimen/margin"
+                    android:text="常用地址"
+                    android:textColor="@color/selector_green_text"/>
+            </LinearLayout>
 
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/people_count"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:dropDownSelector="@drawable/bg_btn_border_green"
-            android:gravity="center"
-            android:minWidth="100dp"
-            android:spinnerMode="dropdown"
-            android:textColor="@color/content"
-            android:textSize="@dimen/content_b"/>
-    </LinearLayout>
+            <View style="@style/divider_line_1px"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="价　　格："/>
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="目的地址："/>
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:inputType="phone"
-            android:lines="1"
-            android:maxLength="11"
-            android:minWidth="60dp"/>
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/end_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/end_address_input"
+                    android:inputType="text"
+                    android:lines="1"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="元/人"
-            android:textColor="@color/content"
-            android:textSize="@dimen/content_b"/>
-    </LinearLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/end_address_common"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:paddingBottom="@dimen/margin"
+                    android:paddingTop="@dimen/margin"
+                    android:text="常用地址"
+                    android:textColor="@color/selector_green_text"/>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+            <View style="@style/divider_line_1px"/>
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="电　　话："/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/phone_input"
-            android:inputType="phone"
-            android:lines="1"
-            android:maxLength="11"
-            android:textColor="@color/content"
-            android:textSize="@dimen/content_b"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="出发时间："/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/margin"
-        android:paddingRight="@dimen/margin">
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/ridding_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="点击选择时间"
+                    android:textColor="@color/content"/>
+            </LinearLayout>
 
-        <TextView
-            style="@style/style_text_head"
-            android:text="备        注："/>
+            <View
+                style="@style/divider_line_1px"/>
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/mark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top|left"
-            android:hint="@string/mark_input"
-            android:inputType="textMultiLine"
-            android:lines="3"
-            android:maxLength="150"/>
-    </LinearLayout>
+            <View
+                style="@style/divider_line_1px"
+                android:layout_marginTop="@dimen/margin"/>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:background="@drawable/bg_btn_border_green"
-        android:text="提交"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/title"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
+
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="人        数："/>
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/people_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:dropDownSelector="@drawable/bg_btn_border_green"
+                    android:gravity="center"
+                    android:minWidth="100dp"
+                    android:spinnerMode="dropdown"
+                    android:textColor="@color/content"/>
+            </LinearLayout>
+
+            <View style="@style/divider_line_1px"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
+
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="价　　格："/>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="11"
+                    android:minWidth="60dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元/人"
+                    android:textColor="@color/content"
+                    android:textSize="@dimen/content_s"/>
+            </LinearLayout>
+
+            <View style="@style/divider_line_1px"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
+
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="电　　话："/>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/passenger_phone"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_input"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="11"
+                    android:textColor="@color/content"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/passenger_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:lines="1"
+                    android:nestedScrollingEnabled="true"
+                    android:paddingBottom="@dimen/margin"
+                    android:paddingTop="@dimen/margin"
+                    android:text="查询"
+                    android:textColor="@color/selector_green_text"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/passenger_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/warning"
+                android:drawablePadding="@dimen/margin"
+                android:gravity="center_vertical"
+                android:padding="@dimen/margin"
+                android:text="此人是骗子"
+                android:textColor="@color/orange"
+                android:visibility="gone"/>
+
+            <View style="@style/divider_line_1px"/>
+
+            <View
+                style="@style/divider_line_1px"
+                android:layout_marginTop="@dimen/margin"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin">
+
+                <TextView
+                    style="@style/style_text_head"
+                    android:text="备        注："/>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/riding_mark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|left"
+                    android:hint="@string/mark_input"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:maxLength="150"/>
+            </LinearLayout>
+
+            <View style="@style/divider_line_1px"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:background="@drawable/bg_btn_border_green"
+                android:text="提交"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

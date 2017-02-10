@@ -133,9 +133,9 @@
     <style name="style_text_head">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">@dimen/margin</item>
+        <item name="android:paddingTop">@dimen/margin_b</item>
         <item name="android:paddingRight">@dimen/margin</item>
-        <item name="android:paddingBottom">@dimen/margin</item>
+        <item name="android:paddingBottom">@dimen/margin_b</item>
     </style>
 
     <style name="divider_line_1px">

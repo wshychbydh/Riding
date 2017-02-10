@@ -8,14 +8,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="center"
-        android:text="发布车源"
-        android:textColor="@color/white"
-        android:textSize="@dimen/title_b"/>
+    <include layout="@layout/common_title"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -197,9 +190,9 @@
             android:id="@+id/carry_mark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="top|left"
             android:hint="@string/mark_input"
             android:inputType="textMultiLine"
-            android:gravity="top|left"
             android:lines="3"
             android:maxLength="150"/>
     </LinearLayout>

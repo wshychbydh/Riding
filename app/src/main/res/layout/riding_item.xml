@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:background="@mipmap/riding"/>
+        android:background="@mipmap/ic_launcher"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,13 +29,17 @@
             <TextView
                 android:id="@+id/riding_item_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="张三"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/riding_item_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                android:layout_marginLeft="@dimen/margin_large"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_s"/>
         </LinearLayout>
 
         <LinearLayout
@@ -51,7 +55,8 @@
             <TextView
                 android:id="@+id/riding_item_time"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -67,9 +72,9 @@
             <TextView
                 android:id="@+id/riding_item_address"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"/>
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +89,15 @@
             <TextView
                 android:id="@+id/riding_item_phone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/riding_times"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:textSize="@dimen/content_s"/>
         </LinearLayout>
 
         <LinearLayout
@@ -101,17 +114,21 @@
             <TextView
                 android:id="@+id/riding_item_mark"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_s"/>
         </LinearLayout>
 
     </LinearLayout>
 
-    <cool.eye.ridding.ui.StatedImageView
+    <cool.eye.ridding.widget.StatedImageView
         android:id="@+id/riding_item_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/margin_b"
+        android:layout_marginRight="@dimen/margin"
+        android:padding="@dimen/margin_b"
         android:src="@drawable/ic_call"/>
 </RelativeLayout>

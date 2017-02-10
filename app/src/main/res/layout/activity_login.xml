@@ -18,16 +18,16 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="@dimen/margin_large"
-                android:src="@mipmap/riding"/>
+                android:src="@mipmap/ic_launcher"/>
 
             <cool.eye.ridding.login.support.ClearableEditText
                 android:id="@+id/et_username"
                 android:layout_width="260dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="45dp"
                 android:background="@drawable/shape_circle_corner_white"
                 android:drawableLeft="@drawable/ic_zhanghutixi_user"
                 android:drawablePadding="@dimen/padding_m"
@@ -73,6 +73,22 @@
                 android:background="@drawable/bg_btn_border_white"
                 android:text="@string/account_login"
                 android:textColor="@color/selector_green_text"/>
+
+            <FrameLayout
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin">
+
+                <TextView
+                    android:id="@+id/tv_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/account_register"
+                    android:textColor="@color/selector_white_text"/>
+            </FrameLayout>
+
 
         </LinearLayout>
     </ScrollView>

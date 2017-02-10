@@ -11,6 +11,6 @@ class Address : BaseBmobObject() {
     var ridingCount: Int = 0 //乘客使用次数
     var carryCount: Int = 0 //司机使用次数
     override fun toString(): String {
-        return "Address(name=$name, city=$city, longitude=$longitude, latitude=$latitude)"
+        return "Address(carryCount=$carryCount, name=$name, city=$city, longitude=$longitude, latitude=$latitude, ridingCount=$ridingCount)"
     }
 }

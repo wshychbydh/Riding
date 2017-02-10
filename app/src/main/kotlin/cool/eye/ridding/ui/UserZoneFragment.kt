@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import cn.bmob.v3.BmobUser
 import cool.eye.ridding.R
+import cool.eye.ridding.login.model.UserModel
 import cool.eye.ridding.login.ui.LoginActivity
-import cool.eye.ridding.ui.scan.CaptureActivity
-import cool.eye.ridding.ui.scan.QrEncodeActivity
+import cool.eye.ridding.zone.card.ui.CaptureActivity
+import cool.eye.ridding.zone.card.ui.CardActivity
+import cool.eye.ridding.zone.contacts.ContactsActivity
+import cool.eye.ridding.zone.contacts.PassengerFragment
 import kotlinx.android.synthetic.main.fragment_zone.*
 
 /**
@@ -24,12 +27,21 @@ class UserZoneFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tv_encode.setOnClickListener { startActivity(Intent(activity, QrEncodeActivity::class.java)) }
-        tv_scan.setOnClickListener { startActivity(Intent(activity, CaptureActivity::class.java)) }
+        draweeview.setImageURI(BmobUser.getCurrentUser(UserModel::class.java).head)
+        card.setOnClickListener { startActivity(Intent(activity, CardActivity::class.java)) }
+        scan.setOnClickListener { startActivity(Intent(activity, CaptureActivity::class.java)) }
+        book.setOnClickListener { toPassengerActivity(PassengerFragment.PASSENGER) }
+        black_list.setOnClickListener { toPassengerActivity(PassengerFragment.BLACK_LIST) }
         logout.setOnClickListener {
             BmobUser.logOut()
             startActivity(Intent(activity, LoginActivity::class.java))
             activity.finish()
         }
+    }
+
+    fun toPassengerActivity(type: Int) {
+        var intent = Intent(activity, ContactsActivity::class.java)
+        intent.putExtra(PassengerFragment.PASSENGER_TYPE, type)
+        startActivity(intent)
     }
 }

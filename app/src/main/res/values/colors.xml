@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#ffffff</color>
+    <color name="white_transparent">#7affffff</color>
     <color name="darker_gray">#7a000000</color>
     <color name="darker_blue">#7a303f9f</color>
 
@@ -11,7 +12,7 @@
 
     <color name="title">#000000</color>
     <color name="content">#99000000</color>
-
+    <color name="border">#22efff</color>
     <!-- 用于LOGO、顶部标题栏、按钮、图标、文字-->
     <color name="colorPrimary">#0AB667</color>
     <color name="colorPrimary_press">#7a0AB667</color>
@@ -34,8 +35,9 @@
     <!-- 线条，线框-->
     <color name="gray">#E5E5E5</color>
 
+    <color name="gray_transparent">#7aE5E5E5</color>
+
     <color name="line_gray">#C9C9C9</color>
     <!--Deawable-->
     <drawable name="bg_transparent">@android:color/transparent</drawable>
-    <color name="yellow">#fa6860</color>
 </resources>

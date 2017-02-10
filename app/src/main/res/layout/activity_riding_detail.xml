@@ -164,7 +164,7 @@
             android:textSize="@dimen/content_b"/>
     </LinearLayout>
 
-    <cool.eye.ridding.ui.StatedImageView
+    <cool.eye.ridding.widget.StatedImageView
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

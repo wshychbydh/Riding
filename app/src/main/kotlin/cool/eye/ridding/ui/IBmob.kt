@@ -13,44 +13,6 @@ import cool.eye.ridding.util.UpdateDataListener
  */
 interface IBmob {
 
-//    fun <T> findData(query: BmobQuery<T>, listener: FindDataListener<T>) {
-//        startProgressDialog()
-//        query.findObjects(object : FindListener<T>() {
-//            override fun done(p0: MutableList<T>?, p1: BmobException?) {
-//                stopProgressDialog()
-//                if (p1 == null) {
-//                    if (p0 == null || p0.isEmpty()) {
-//                        listener.onSucceedEmptyData()
-//                    } else {
-//                        listener.onSucceedWithData(p0)
-//                    }
-//                } else {
-//                    toast(p1.message ?: "")
-//                    listener.onFailed(p1)
-//                }
-//            }
-//        })
-//    }
-
-//    fun <T> BmobQuery<T>.findData(listener: FindDataListener<T>) {
-//        startProgressDialog()
-//        findObjects(object : FindListener<T>() {
-//            override fun done(p0: MutableList<T>?, p1: BmobException?) {
-//                stopProgressDialog()
-//                if (p1 == null) {
-//                    if (p0 == null || p0.isEmpty()) {
-//                        listener.onSucceedEmptyData()
-//                    } else {
-//                        listener.onSucceedWithData(p0)
-//                    }
-//                } else {
-//                    toast(p1.message ?: "")
-//                    listener.onFailed(p1)
-//                }
-//            }
-//        })
-//    }
-
     fun BmobObject.saveData(listener: SaveDataListener) {
         startProgressDialog()
         save(object : SaveListener<String?>() {
@@ -62,6 +24,13 @@ interface IBmob {
                     toast(p1.message ?: "未知错误")
                     listener.onFailed(p1)
                 }
+            }
+        })
+    }
+
+    fun BmobObject.updateData() {
+        update(object: UpdateListener() {
+            override fun done(p0: BmobException?) {
             }
         })
     }

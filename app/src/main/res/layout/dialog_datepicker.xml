@@ -8,20 +8,32 @@
 
     <include layout="@layout/dialog_common_title"/>
 
-    <DatePicker
-        android:id="@+id/date_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TimePicker
-        android:id="@+id/time_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/sure"
-        style="@style/style_button_border"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_margin="30dp"
-        android:text="确定"/>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <DatePicker
+                android:id="@+id/date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TimePicker
+                android:id="@+id/time_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/sure"
+                style="@style/style_button_border"
+                android:layout_width="match_parent"
+                android:layout_margin="30dp"
+                android:text="确定"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

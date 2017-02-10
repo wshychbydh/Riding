@@ -17,6 +17,7 @@ import cool.eye.ridding.R
 import cool.eye.ridding.data.CarryInfo
 import cool.eye.ridding.data.CarryStatus
 import cool.eye.ridding.data.Riding
+import cool.eye.ridding.db.DBHelper
 import cool.eye.ridding.util.DeleteDataListener
 import cool.eye.ridding.util.UpdateDataListener
 import cool.eye.ridding.util.Utils
@@ -42,6 +43,7 @@ class RidingFragment : BaseFragment() {
         var query = BmobQuery<CarryInfo>()
         query.addWhereEqualTo("status", CarryStatus.UNDERWAY.code)
         query.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
+        query.order("-updatedAt,-createdAt")
         query.findObjects(object : FindListener<CarryInfo>() {
             override fun done(p0: MutableList<CarryInfo>?, p1: BmobException?) {
                 if (p0?.isNotEmpty() ?: false) {
@@ -61,8 +63,8 @@ class RidingFragment : BaseFragment() {
         riding_recyclerview.adapter = null
         riding_recyclerview.removeAllViews()
         carry_finished.visibility = View.GONE
-        riding_status_tv.text = "你还未发布车源信息"
-        riding_add.text = "发布车源"
+        riding_status_tv.text = getString(R.string.car_submit_none)
+        riding_add.text = getString(R.string.car_submit)
         riding_add.setOnClickListener {
             startActivity(Intent(activity, CarryAddActivity::class.java))
         }
@@ -82,7 +84,7 @@ class RidingFragment : BaseFragment() {
             CarryAddActivity.launch(activity, carryInfo)
         }
 
-        riding_add.text = "添加乘客"
+        riding_add.text = getString(R.string.passenger_add)
         riding_add.visibility = if (remainCount > 0) View.VISIBLE else View.GONE
         carry_finished.visibility = View.VISIBLE
         carry_finished.setOnClickListener {
@@ -93,7 +95,7 @@ class RidingFragment : BaseFragment() {
                 }
             })
         }
-        riding_add.setOnClickListener { RidingAddActivity.launch(context, remainCount, carryInfo) }
+        riding_add.setOnClickListener { RidingAddActivity.launch(context, remainCount, carryInfo, null) }
         riding_recyclerview.layoutManager = LinearLayoutManager(context)
         riding_recyclerview.itemAnimator = DefaultItemAnimator()
         riding_recyclerview.addItemDecoration(DividerDecoration(context))
@@ -120,7 +122,7 @@ class RidingFragment : BaseFragment() {
                         p0.forEach { riding -> count += riding.peopleCount }
                         remainCount = carryInfo.peopleCount - count
                         riding_add.visibility = if (remainCount > 0) View.VISIBLE else View.GONE
-                        riding_status_tv.text = Utils.formatColorOfStr("已载$count 人", resources.getColor(R.color.red), 2, 2)
+                        riding_status_tv.text = Utils.formatColorOfStr(getString(R.string.passenger_take_count,count), resources.getColor(R.color.red), 2, 3)
                     }
                 }
             }
@@ -134,21 +136,37 @@ class RidingFragment : BaseFragment() {
         }
 
         override fun onBindViewHolder(holder: RidingHolder, position: Int) {
-            holder.view.riding_item_name.text = ridings[position].passenger?.name
+            var passenger = ridings[position].passenger!!
+            holder.view.riding_item_name.text = passenger.name
             holder.view.riding_item_count.text = "${ridings[position].peopleCount()}"
             holder.view.riding_item_phone.text = ridings[position].passenger?.phone
             holder.view.riding_item_address.text = "${ridings[position].composeAddress()}"
             holder.view.riding_item_time.text = Utils.formatSimpleTime(ridings[position].ridingTime)
             holder.view.riding_item_mark_layout.visibility = if (ridings[position].mark.isNullOrEmpty()) View.GONE else View.VISIBLE
             holder.view.riding_item_mark.text = ridings[position].mark
+            if (passenger.by_count > 1) {
+                holder.view.riding_times.visibility = View.VISIBLE
+                var realCount = passenger.by_count - 1 //因为在添加乘车记录的时候就默认添加了一次乘车记录
+                holder.view.riding_times.text = Utils.formatPartColorOfStr(resources.getColor(R.color.orange),
+                        getString(R.string.by_count, realCount), realCount)
+            } else {
+                holder.view.riding_times.visibility = View.GONE
+            }
+            holder.view.riding_item_call.setOnClickListener {
+                Utils.callPhone(context, passenger.phone!!)
+            }
             holder.view.setOnClickListener {
-                Utils.callPhone(context, ridings[position].passenger!!.phone!!)
+                //计算可用剩余人数
+                RidingAddActivity.launch(context, remainCount + ridings[position].peopleCount, carryInfo, ridings[position])
             }
             holder.view.setOnLongClickListener {
                 AlertDialog.Builder(context)
-                        .setMessage("确定要删除该条记录吗?")
-                        .setNegativeButton("取消", null)
-                        .setPositiveButton("确定", { progressDialog, witch ->
+                        .setMessage(getString(R.string.select_what_you_do))
+                        .setNegativeButton(getString(R.string.blacklist), { dialog, witch ->
+                            blackList(position)
+                        })
+                        .setNeutralButton(getString(R.string.cancel), null)
+                        .setPositiveButton(getString(R.string.sure), { dialog, witch ->
                             deleteRiding(position)
                         }).show()
                 false
@@ -160,10 +178,29 @@ class RidingFragment : BaseFragment() {
             return RidingHolder(view)
         }
 
+        fun blackList(position: Int) {
+            val passenger = ridings[position].passenger
+            passenger!!.promise_not++
+            passenger!!.by_count--
+            DBHelper.saveBlackList(passenger)
+            passenger!!.updateData(object : UpdateDataListener {
+                override fun onSucceed() {
+                    toast(getString(R.string.blacklist_add_succeed))
+                    deleteRiding(position)
+                }
+            })
+        }
+
         fun deleteRiding(position: Int) {
             val riding = ridings[position]
+
+            riding.passenger!!.by_count--
+            riding.passenger!!.updateData()
+
             riding.deleteData(riding.objectId, object : DeleteDataListener {
                 override fun onSucceed() {
+                    toast(getString(R.string.delect_succeed))
+                    startProgressDialog()
                     getRidingInfo()
                 }
             })

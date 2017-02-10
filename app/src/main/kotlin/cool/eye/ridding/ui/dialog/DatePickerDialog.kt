@@ -68,7 +68,7 @@ class DatePickerDialog(context: Context) : Dialog(context, R.style.alert_dialog)
     }
 
     fun formatNumber(num: Int): String {
-        if (num < 9) {
+        if (num <= 9) {
             return "0$num"
         } else {
             return "$num"

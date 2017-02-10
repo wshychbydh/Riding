@@ -34,6 +34,21 @@ import java.util.regex.Pattern
  * Created by cool on 17-1-13.
  */
 object Utils {
+
+    /**
+     * 判断网络是否连接
+     *
+     * 需添加权限 `<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>`
+
+     * @param context 上下文
+     * *
+     * @return `true`: 是<br></br>`false`: 否
+     */
+    fun isNetAvaiable(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
+    }
+
     fun formatSimpleTime(time: Long): String {
         val format = SimpleDateFormat("HH:mm")
         return format.format(Date(time))
@@ -61,6 +76,7 @@ object Utils {
         //调起拨打电话，需要用户手动点击
         val intent = Intent(Intent.ACTION_DIAL)
         intent.data = Uri.parse("tel:$phone")
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
     }
 
@@ -116,6 +132,14 @@ object Utils {
     fun formatColorOfStr(cs: CharSequence, color: Int, from: Int, to: Int): SpannableString {
         val span = SpannableString(cs)
         span.setSpan(ForegroundColorSpan(color), from, to, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        return span
+    }
+
+    fun formatPartColorOfStr(color: Int, all: CharSequence, part: Any): SpannableString {
+        val span = SpannableString(all)
+        var start = all.indexOf(part.toString())
+        var len = part.toString().length
+        span.setSpan(ForegroundColorSpan(color), start, start + len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         return span
     }
 
@@ -266,6 +290,12 @@ object Utils {
         } else {
             // Util.showToast(ctx, ctx.getString(R.string.phone_format))
         }
+    }
+
+    @JvmStatic fun isPhoneNumber(phoneNumber: CharSequence): Boolean {
+        val p = Pattern.compile("^1[3|4|5|7|8][0-9]\\d{8}$")
+        val m = p.matcher(phoneNumber)
+        return m.matches()
     }
 
     /**

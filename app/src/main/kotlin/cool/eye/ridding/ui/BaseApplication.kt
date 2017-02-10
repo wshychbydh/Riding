@@ -3,6 +3,9 @@ package cool.eye.ridding.ui
 import android.app.Application
 import cn.bmob.v3.Bmob
 import cn.bmob.v3.BmobConfig
+import com.facebook.drawee.backends.pipeline.Fresco
+
+
 
 /**
  * Created by cool on 17-1-24.
@@ -22,5 +25,7 @@ class BaseApplication : Application() {
                 .setFileExpiration(2500)
                 .build()
         Bmob.initialize(config)
+
+        Fresco.initialize(this)
     }
 }

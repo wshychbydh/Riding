@@ -29,10 +29,10 @@ public class QRCodeUtil {
      * @param filePath  用于存储二维码图片的文件路径
      * @return 生成二维码及保存文件是否成功
      */
-    public static boolean createQRImage(String content, int widthPix, int heightPix, Bitmap logoBm, String filePath) {
+    public static Bitmap createQRImage(String content, int widthPix, int heightPix, Bitmap logoBm, String filePath) {
         try {
             if (content == null || "".equals(content)) {
-                return false;
+                return null;
             }
 
             //配置参数
@@ -41,7 +41,7 @@ public class QRCodeUtil {
             //容错级别
             hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
             //设置空白边距的宽度
-//            hints.put(EncodeHintType.MARGIN, 2); //default is 4
+//            hints.put(EncodeHintType.MARGIN, 2); //default is 
 
             // 图像数据转换，使用了矩阵转换
             BitMatrix bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, widthPix, heightPix, hints);
@@ -67,12 +67,15 @@ public class QRCodeUtil {
             }
 
             //必须使用compress方法将bitmap保存到文件中再进行读取。直接返回的bitmap是没有任何压缩的，内存消耗巨大！
-            return bitmap != null && bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(filePath));
+            if (bitmap != null) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(filePath));
+            }
+            return bitmap;
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return null;
     }
 
     /**
