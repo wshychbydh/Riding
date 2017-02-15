@@ -342,18 +342,14 @@ object Utils {
         }
         val connm = context
                 .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connm == null) {
-            return false
-        } else {
-            val nis = connm.allNetworkInfo
-            if (nis != null) {
-                for (i in nis.indices) {
-                    if (nis[i].state == NetworkInfo.State.CONNECTED) {
-                        return true
-                    }
-                }
-            }
+
+        val nis = connm.allNetworkInfo
+        if (nis != null) {
+            nis.indices
+                    .filter { nis[it].state == NetworkInfo.State.CONNECTED }
+                    .forEach { return true }
         }
+
         return false
     }
 
@@ -475,5 +471,14 @@ object Utils {
                     .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm?.hideSoftInputFromWindow(et.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
+    }
+
+    fun sendSMS(context: Context, mobile: String) {
+        //  var mobile = "1890000000;1890000001"
+        var intent = Intent(Intent.ACTION_VIEW)
+        intent.putExtra("address", mobile)
+//intent.putExtra("sms_body", "I am joe!")
+        intent.type = "vnd.android-dir/mms-sms"
+        context.startActivity(intent)
     }
 }

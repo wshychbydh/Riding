@@ -205,5 +205,5 @@
         android:background="@drawable/bg_btn_border_green"
         android:text="保存"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/title"/>
+        android:textSize="@dimen/title_s"/>
 </LinearLayout>

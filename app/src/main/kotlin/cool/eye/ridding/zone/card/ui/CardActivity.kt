@@ -14,6 +14,7 @@ class CardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
         iv_back.setOnClickListener { finish() }
+        tv_title.text = getString(R.string.card_image)
         iv_submit.setImageResource(R.drawable.add)
         iv_submit.setOnClickListener { startActivityForResult(Intent(this, CardAddActivity::class.java), 1001) }
         loadView()

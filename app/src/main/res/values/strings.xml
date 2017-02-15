@@ -1,15 +1,34 @@
 <resources>
-    <string name="app_name">Ridding</string>
+    <string name="app_name">拼车</string>
 
     <string name="account_username_hint">请输入用户名</string>
+    <string name="account_phone_error">手机号不正确</string>
+    <string name="account_email_error">邮箱不正确</string>
     <string name="account_password_hint">请输入密码</string>
+    <string name="account_password_old">请输入旧密码</string>
+    <string name="account_password_new">请输入新密码</string>
+    <string name="account_password_new2">请再输入新密码</string>
     <string name="account_password_hint2">请再输入密码</string>
     <string name="account_password_6_14">请输入6-14位的密码</string>
     <string name="account_password_different">两次输入的密码不一致</string>
+    <string name="account_set_password_please">请设置密码</string>
+    <string name="account_password_modify">修改密码</string>
     <string name="account_login">登录</string>
     <string name="account_register">注册</string>
     <string name="account_login_success">登录成功</string>
     <string name="account_register_success">注册成功</string>
+    <string name="account_about">关于</string>
+    <string name="account_feedback">意见反馈</string>
+    <string name="account_feedback_type">意见类型</string>
+    <string name="account_feedback_limit">请提出您的意见或建议，帮助我们不断改进。</string>
+    <string name="account_notice">*您的意见对我们来说至关重要，我们将不断优化体验</string>
+    <string name="account_submit">提交</string>
+    <string name="account_feedback_6">请输入6字以上的意见或建议</string>
+    <string name="account_feedback_contacts">请填写你的邮箱或手机号</string>
+    <string name="account_feedback_contacts_error">请正确填写你的邮箱或手机号</string>
+    <string name="account_feedback_succeed">提交成功，感谢你的反馈</string>
+    <string name="account_contacts">联系作者：</string>
+    <string name="account_qq">819761135@qq.com</string>
 
     <string name="capture_camera_failed">Camera disabled</string>
     <string name="capture_hint">Put the qrcode in frame</string>
@@ -27,7 +46,9 @@
     <string name="time_input">点击选择出发时间</string>
     <string name="mark_input">点击输入备注</string>
     <string name="phone_input">点击输入电话号码</string>
+    <string name="email_input">点击输入邮件地址</string>
     <string name="data_none">暂无数据</string>
+    <string name="riding_add">添加乘车信息</string>
     <string name="passenger_add">添加乘客</string>
     <string name="passenger_take_count">已载 %1$d 人</string>
     <string name="name_empty">名字不能为空</string>
@@ -50,6 +71,7 @@
     <string name="black_list">黑名单</string>
     <string name="card_text">我的文本</string>
     <string name="card_image">我的名片</string>
+    <string name="card_add">添加名片</string>
     <string name="scan">扫二维码</string>
     <string name="logout">注销</string>
     <string name="mine">我的</string>
@@ -63,9 +85,15 @@
     <string name="select_what_you_do">请选择你要执行的操作</string>
     <string name="blacklist">黑名单</string>
     <string name="cancel">取消</string>
+    <string name="delete">删除</string>
     <string name="sure">确定</string>
     <string name="blacklist_add_succeed">已加入黑名单</string>
     <string name="delect_succeed">删除成功</string>
     <string name="car_submit_none">你还未发布车源信息</string>
+    <string name="carry_finish_query">确定要完成该车源吗？</string>
+    <string name="save">保存</string>
+    <string name="unknow_error">未知错误</string>
+    <string name="userinfo_update_succeed">更新用户信息成功</string>
+    <string name="account_userinfo_edit">编辑个人信息</string>
 
 </resources>

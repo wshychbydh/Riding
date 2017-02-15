@@ -1,9 +1,8 @@
-package cool.eye.ridding.zone.ui;
+package cool.eye.ridding.zone.photo;
 
 import android.content.Intent;
 
 import cool.eye.ridding.ui.BaseActivity;
-import cool.eye.ridding.zone.helper.ITakePhoto;
 
 /**
  * @author cooleye

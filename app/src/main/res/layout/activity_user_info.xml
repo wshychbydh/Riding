@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cool.eye.ridding.zone.userinfo.UserInfoActivity">
+
+    <include layout="@layout/common_title"/>
+
+    <View style="@style/divider_line_1px"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="头　像"/>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/userinfo_head"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignParentRight="true"
+            fresco:actualImageScaleType="center"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:roundAsCircle="true"/>
+    </RelativeLayout>
+
+    <View style="@style/divider_line_1px"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="@dimen/margin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="昵　称："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/userinfo_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="8"
+            android:padding="@dimen/margin"/>
+    </LinearLayout>
+
+    <View style="@style/divider_line_1px"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="姓　别："/>
+
+        <RadioGroup
+            android:id="@+id/userinfo_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:textColor="@color/content"/>
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_b"
+                android:text="女"
+                android:textColor="@color/content"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <View style="@style/divider_line_1px"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="年　龄："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/userinfo_age"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="年龄"
+            android:inputType="phone"
+            android:lines="1"
+            android:maxLength="2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="岁"/>
+    </LinearLayout>
+
+    <View style="@style/divider_line_1px"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="@dimen/margin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="电　话："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/userinfo_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/phone_input"
+            android:inputType="phone"
+            android:lines="1"
+            android:maxLength="11"
+            android:textColor="@color/content"/>
+
+    </LinearLayout>
+
+    <View style="@style/divider_line_1px"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin">
+
+        <TextView
+            style="@style/style_text_head"
+            android:text="邮　箱："/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/userinfo_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/email_input"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:textColor="@color/content"/>
+
+    </LinearLayout>
+
+    <View style="@style/divider_line_1px"/>
+</LinearLayout>

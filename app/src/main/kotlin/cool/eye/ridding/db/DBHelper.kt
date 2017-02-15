@@ -8,13 +8,27 @@ import java.util.*
 /**
  * Created by cool on 17-2-7.
  */
-object DBHelper {
-    const val NAME = "contacts"
-    const val VERSION = 1
-    lateinit var sqlite_helper: SQLiteHelper
+class DBHelper {
 
-    fun initSQLite(context: Context) {
-        sqlite_helper = SQLiteHelper(context, NAME, null, VERSION)
+    companion object {
+        internal const val NAME = "contacts"
+        internal const val VERSION = 1
+        lateinit internal var sqlite_helper: SQLiteHelper
+        internal var helper: DBHelper? = null
+
+        fun get(context: Context): DBHelper {
+            if (helper == null) {
+                init(context)
+            }
+            return helper!!
+        }
+
+        @Synchronized internal fun init(context: Context) {
+            if (helper == null) {
+                helper = DBHelper()
+                sqlite_helper = SQLiteHelper(context, NAME, null, VERSION)
+            }
+        }
     }
 
     fun savePassenger(passenger: Passenger) {
@@ -92,6 +106,16 @@ object DBHelper {
     fun getBlackListByPhone(phone: String): Passenger? {
         val database = sqlite_helper.readableDatabase
         val cursor = database.query(SQLiteHelper.BLACK_LIST, null, "${SQLiteHelper.PHONE}=$phone", null, null, null, null)
+        if (cursor != null && cursor.count > 0) {
+            cursor.moveToFirst()
+            return Passenger.parseJson(cursor.getString(cursor.getColumnIndex(SQLiteHelper.DATA)))
+        }
+        return null
+    }
+
+    fun getPassengerByPhone(phone: String): Passenger? {
+        val database = sqlite_helper.readableDatabase
+        val cursor = database.query(SQLiteHelper.PASSENGER, null, "${SQLiteHelper.PHONE}=$phone", null, null, null, null)
         if (cursor != null && cursor.count > 0) {
             cursor.moveToFirst()
             return Passenger.parseJson(cursor.getString(cursor.getColumnIndex(SQLiteHelper.DATA)))

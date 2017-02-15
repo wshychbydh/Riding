@@ -11,7 +11,7 @@ import cool.eye.ridding.db.DBHelper
 
 class PhoneReceiver : BroadcastReceiver() {
 
-    private var mContext: Context? = null
+    private lateinit var mContext: Context
 
     override fun onReceive(context: Context, intent: Intent) {
         mContext = context
@@ -19,12 +19,15 @@ class PhoneReceiver : BroadcastReceiver() {
         if (intent.action == Intent.ACTION_NEW_OUTGOING_CALL) {
             val phoneNumber = intent
                     .getStringExtra(Intent.EXTRA_PHONE_NUMBER)
-            val passenger = DBHelper.getBlackListByPhone(phoneNumber)
+            var passenger = DBHelper.get(context).getBlackListByPhone(phoneNumber)
             if (passenger == null) {
-                Toast.makeText(context, "打电话" + phoneNumber, Toast.LENGTH_SHORT).show()
+                passenger = DBHelper.get(mContext).getPassengerByPhone(phoneNumber)
+                if (passenger != null) {
+                    Toast.makeText(mContext, passenger.call(), Toast.LENGTH_LONG).show()
+                }
             } else {
                 kotlin.repeat(3, {
-                    Toast.makeText(context, passenger.showRemark(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, passenger!!.blackList(), Toast.LENGTH_LONG).show()
                 })
             }
         } else {
@@ -49,12 +52,15 @@ class PhoneReceiver : BroadcastReceiver() {
                 TelephonyManager.CALL_STATE_IDLE -> println("挂断")
                 TelephonyManager.CALL_STATE_OFFHOOK -> println("接听")
                 TelephonyManager.CALL_STATE_RINGING -> {
-                    val passenger = DBHelper.getBlackListByPhone(incomingNumber)
+                    var passenger = DBHelper.get(mContext).getBlackListByPhone(incomingNumber)
                     if (passenger == null) {
-                        Toast.makeText(mContext, "来电监听" + incomingNumber, Toast.LENGTH_SHORT).show()
+                        passenger = DBHelper.get(mContext).getPassengerByPhone(incomingNumber)
+                        if (passenger != null) {
+                            Toast.makeText(mContext, passenger.receive(), Toast.LENGTH_LONG).show()
+                        }
                     } else {
                         kotlin.repeat(3, {
-                            Toast.makeText(mContext, passenger.showRemark(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(mContext, passenger!!.blackList(), Toast.LENGTH_LONG).show()
                         })
                     }
                 }

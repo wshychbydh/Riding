@@ -32,10 +32,11 @@ class CarryFragment : BaseFragment() {
         refreshView = carry_refreshview as EmptyRecyclerView<CarryInfo>
         refreshView.setAdapter(RecyclerAdapter(refreshView.dataList))
         refreshView.setEmptyView(EmptyView(context))
-        getCarryInfo()
+        loadCarryInfo()
     }
 
-    private fun getCarryInfo() {
+    fun loadCarryInfo() {
+        refreshView.resetView()
         startProgressDialog()
         var query = BmobQuery<CarryInfo>()
         query.addWhereEqualTo("status", 1)

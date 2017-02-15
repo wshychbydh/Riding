@@ -10,4 +10,8 @@ class UserModel : BmobUser() {
     var age: Int? = null
     var head: String? = null
     var sex: Int? = null
+    var nickname: String? = null
+    override fun toString(): String {
+        return "UserModel(age=$age, head=$head, sex=$sex, nickname=$nickname)"
+    }
 }

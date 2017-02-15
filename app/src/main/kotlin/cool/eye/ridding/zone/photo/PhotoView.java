@@ -1,8 +1,9 @@
-package cool.eye.ridding.zone.ui;
+package cool.eye.ridding.zone.photo;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,15 +14,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UploadFileListener;
 import cool.eye.ridding.R;
 import cool.eye.ridding.zone.helper.ICallback;
-import cool.eye.ridding.zone.helper.IPhotoCallback;
-import cool.eye.ridding.zone.helper.ITakePhoto;
 import cool.eye.ridding.zone.helper.LocalStorage;
 
 /**
@@ -34,12 +37,12 @@ public class PhotoView extends LinearLayout implements OnClickListener {
     public static final int CANCEL = 0; // 取消
 
     private Context mContext;
-    private String mPhotoPath;
     private IPhotoCallback mPhotoCallback;
     private ICallback mClickCallback;
     private boolean mIsCut = true; // 是否剪切
     private Uri mUri;
     private float mRatio = 1; // 剪切照片时x/y的比例
+    private IUploadCallback mUploadCallback;
 
     public PhotoView(Context context) {
         this(context, null);
@@ -67,6 +70,11 @@ public class PhotoView extends LinearLayout implements OnClickListener {
 
     public PhotoView setClickCallback(ICallback ICallback) {
         mClickCallback = ICallback;
+        return this;
+    }
+
+    public PhotoView setUploadCallback(IUploadCallback uploadCallback) {
+        mUploadCallback = uploadCallback;
         return this;
     }
 
@@ -103,8 +111,7 @@ public class PhotoView extends LinearLayout implements OnClickListener {
      * 拍照
      */
     public void takePhoto() {
-        mPhotoPath = LocalStorage.composePhotoImageFile();
-        File file = new File(mPhotoPath);
+        File file = new File(LocalStorage.composePhotoImageFile());
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -121,7 +128,6 @@ public class PhotoView extends LinearLayout implements OnClickListener {
      * 选择相册
      */
     public void selectAlbum() {
-        mPhotoPath = null;
         // Intent intent = new Intent();
         // intent.setType("image/*");
         // intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -160,75 +166,82 @@ public class PhotoView extends LinearLayout implements OnClickListener {
 //                    mPhotoCallback.onSelected(bmp);
 //                }
 //            }
-            if (mPhotoCallback != null) {
-                Uri data = intent.getData();
-                mPhotoCallback.onSelected(decodeUriAsBitmap(data == null ? mUri : data));
-            }
-        }
-
-        private Bitmap decodeUriAsBitmap(Uri uri) {
-            if (uri != null) {
-                try {
-                    return BitmapFactory.decodeStream(mContext.getContentResolver()
-                            .openInputStream(uri));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
+            Uri data = intent.getData();
+            mUri = data == null ? mUri : data;
+            tryUpload();
         }
 
         private void dealImage() {
             if (mIsCut) {
                 adjustPhotoSize((Activity) mContext, mUri, mRatio);
             } else {
-                if (mPhotoCallback != null) {
-                    mPhotoCallback.onSelected(decodeUriAsBitmap(mUri));
-                }
+                tryUpload();
             }
         }
     };
 
-//	private void saveAndUpload(final InputStream inputStream) {
-//		if (inputStream != null) {
-//			File folder = new File(mDir);
-//			if (!folder.exists()) {
-//				folder.mkdirs();
-//			}
-//
-//			try {
-//				StringBuilder sb = new StringBuilder();
-//				sb.append(System.currentTimeMillis()).append(LocalStorage.IMAGE_SUFF);
-//				File file = new File(folder, sb.toString());
-//				file.createNewFile();
-//				if (mPhotoPath == null || mPhotoPath.isEmpty()) {
-//					boolean result = ImageUtil.saveImage(inputStream, file);
-//					if (result) {
-//						mPhotoPath = file.getAbsolutePath();
-//					}
-//				} else {
-//					if (mIsCut) {
-//						boolean result = ImageUtil.saveImage(inputStream, file);
-//						if (result) {
-//							new File(mPhotoPath).delete();
-//							mPhotoPath = file.getAbsolutePath();
-//						}
-//					}
-//				}
-//			} catch (Exception e) {
-//				Util.showToast(mContext, "保存图片出错！");
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+    private Bitmap decodeUriAsBitmap(Uri uri) {
+        if (uri != null) {
+            try {
+                return BitmapFactory.decodeStream(mContext.getContentResolver()
+                        .openInputStream(uri));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
-//    private void renameFile(final String path, final String resId) {
-//        File file = new File(path);
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(file.getParent()).append(File.separator).append(resId)
-//                .append(LocalStorage.IMAGE_SUFF);
-//        file.renameTo(new File(sb.toString()));
-//    }
+    private void tryUpload() {
+        if (mUploadCallback == null) {
+            if (mPhotoCallback != null) {
+                mPhotoCallback.onSelected(decodeUriAsBitmap(mUri));
+            }
+        } else {
+            String path = getPathByUri(getContext(), mUri).replace("file://", "");
+            final UploadProgressDialog dialog = new UploadProgressDialog(getContext());
+            dialog.show();
+            final BmobFile bmobFile = new BmobFile(new File(path));
+            bmobFile.uploadblock(new UploadFileListener() {
+
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        mUploadCallback.onSucceed(bmobFile.getFileUrl());
+                    } else {
+                        Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onProgress(Integer value) {
+                    // 返回的上传进度（百分比）
+                    dialog.updateProgress(value);
+                }
+            });
+        }
+    }
+
+    public static String getPathByUri(Context cxt, Uri uri) {
+        String img_path = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        try {
+            if (uri.toString().toLowerCase().endsWith(".jpg")
+                    || uri.toString().toLowerCase().endsWith(".png")
+                    || uri.toString().toLowerCase().endsWith(".jpeg")) {
+                img_path = uri.toString() + "";
+            } else {
+                Cursor cursor = ((Activity) cxt).managedQuery(uri, proj, null, null, null);
+                int actual_image_column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                cursor.moveToFirst();
+                img_path = cursor.getString(actual_image_column_index);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return img_path;
+    }
 
     /**
      * 裁剪图片方法实现

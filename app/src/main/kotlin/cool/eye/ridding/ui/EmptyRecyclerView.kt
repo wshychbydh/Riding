@@ -64,4 +64,10 @@ class EmptyRecyclerView<T> @JvmOverloads constructor(context: Context, attrs: At
         recyclerView.adapter?.notifyDataSetChanged()
         emptyView?.visibility = if (mutableDataList == null || mutableDataList!!.isEmpty()) VISIBLE else GONE
     }
+
+    fun resetView(){
+        mutableDataList?.clear()
+        recyclerView.adapter?.notifyDataSetChanged()
+        emptyView?.visibility = if (mutableDataList == null || mutableDataList!!.isEmpty()) VISIBLE else GONE
+    }
 }

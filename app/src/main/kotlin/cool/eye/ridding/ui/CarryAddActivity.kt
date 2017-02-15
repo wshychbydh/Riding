@@ -1,6 +1,5 @@
 package cool.eye.ridding.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.AppCompatEditText
@@ -25,10 +24,11 @@ class CarryAddActivity : BaseActivity() {
 
     companion object {
         const val CARRY_INFO = "carry_info"
-        fun launch(context: Context, carryInfo: CarryInfo) {
-            var intent = Intent(context, CarryAddActivity::class.java)
-            intent.putExtra(CARRY_INFO, carryInfo)
-            context.startActivity(intent)
+        fun launch(fragment: RidingFragment, carryInfo: CarryInfo?) {
+            var intent = Intent(fragment.context, CarryAddActivity::class.java)
+            if (carryInfo != null)
+                intent.putExtra(CARRY_INFO, carryInfo)
+            fragment.startActivityForResult(intent, 1001)
         }
     }
 
@@ -77,36 +77,36 @@ class CarryAddActivity : BaseActivity() {
     }
 
     fun save() {
-        val startAds = carry_start_address.text.toString()
+        val startAds = carry_start_address.text.trim().toString()
         if (startAds.isNullOrEmpty()) {
             toast(getString(R.string.start_address_empty))
             return
         }
-        val endAds = carry_end_address.text.toString()
+        val endAds = carry_end_address.text.trim().toString()
         if (endAds.isNullOrEmpty()) {
             toast(getString(R.string.end_address_empty))
             return
         }
 
-        val goOffTime = carry_go_off.text
+        val goOffTime = carry_go_off.text.trim()
         if (goOffTime.isNullOrEmpty()) {
             toast(getString(R.string.go_off_empty))
             return
         }
 
-        val peopleCount = carry_people_count.text.toString()
+        val peopleCount = carry_people_count.text.trim().toString()
         if (peopleCount.isNullOrEmpty()) {
             toast(getString(R.string.riding_count_empty))
             return
         }
 
-        val price = carry_price.text.toString()
+        val price = carry_price.text.trim().toString()
         if (price.isNullOrEmpty()) {
             toast(getString(R.string.price_empty))
             return
         }
 
-        val phone = carry_phone.text.toString()
+        val phone = carry_phone.text.trim().toString()
         if (phone.isNullOrEmpty()) {
             toast(getString(R.string.phone_empty))
             return
@@ -137,7 +137,8 @@ class CarryAddActivity : BaseActivity() {
             carryInfo.saveData(object : SaveDataListener {
                 override fun onSucceed(objectId: String) {
                     toast(getString(R.string.carry_add_succeed))
-                    HomeActivity.launch(this@CarryAddActivity, 0)
+                    setResult(1001)
+                    finish()
                 }
             })
         } else {
@@ -145,7 +146,8 @@ class CarryAddActivity : BaseActivity() {
             carryInfo.updateData(object : UpdateDataListener {
                 override fun onSucceed() {
                     toast(getString(R.string.carry_update_succeed))
-                    HomeActivity.launch(this@CarryAddActivity, 0)
+                    setResult(1001)
+                    finish()
                 }
             })
         }

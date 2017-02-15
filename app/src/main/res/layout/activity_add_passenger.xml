@@ -169,19 +169,6 @@
             android:textColor="@color/selector_green_text"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/passenger_notice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:drawableLeft="@drawable/warning"
-        android:drawablePadding="@dimen/margin"
-        android:gravity="center_vertical"
-        android:padding="@dimen/margin"
-        android:text="此人是骗子"
-        android:textColor="@color/orange"
-        android:visibility="gone"/>
-
     <View style="@style/divider_line_1px"/>
 
     <View
@@ -208,7 +195,7 @@
             android:gravity="center"
             android:inputType="text"
             android:lines="1"
-            android:maxLength="2"
+            android:maxLength="3"
             android:text="0"/>
 
         <TextView
@@ -271,7 +258,7 @@
             android:text="备        注："/>
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/mark"
+            android:id="@+id/passenger_remark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"

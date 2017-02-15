@@ -9,8 +9,8 @@ import cool.eye.ridding.R
 import cool.eye.ridding.zone.card.colorpicker.picker.ColorPicker
 import cool.eye.ridding.zone.card.db.DBHelper
 import cool.eye.ridding.zone.card.helper.CardHelper
-import cool.eye.ridding.zone.ui.PhotoActivity
-import cool.eye.ridding.zone.ui.PhotoDialog
+import cool.eye.ridding.zone.photo.PhotoActivity
+import cool.eye.ridding.zone.photo.PhotoDialog
 import kotlinx.android.synthetic.main.activity_card_add.*
 import kotlinx.android.synthetic.main.common_title.*
 
@@ -26,12 +26,12 @@ class CardAddActivity : PhotoActivity() {
         bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         bgColor = resources.getColor(R.color.white)
         fontColor = resources.getColor(R.color.title)
-        tv_title.text = getString(R.string.card_image)
+        tv_title.text = getString(R.string.card_add)
         iv_back.setOnClickListener { finish() }
         btn_card_qr.setOnClickListener {
             if (cardInfoAvailable()) {
                 DBHelper.saveCardInfo(this@CardAddActivity, et_card_content.text.toString())
-                CardHelper.toQrCode(this, et_card_content.text.toString(), bitmap, {
+                CardHelper.toQrCode(this, et_card_content.text.trim().toString(), bitmap, {
                     bitmap ->
                     if (bitmap != null) iv_show.setImageBitmap(bitmap)
                 })
@@ -40,7 +40,7 @@ class CardAddActivity : PhotoActivity() {
         btn_card_img.setOnClickListener {
             if (cardInfoAvailable()) {
                 DBHelper.saveCardInfo(this@CardAddActivity, et_card_content.text.toString())
-                CardHelper.toImage(this, et_card_content.text.toString(), et_card_content.paint, fontColor, bgColor, {
+                CardHelper.toImage(this, et_card_content.text.trim().toString(), et_card_content.paint, fontColor, bgColor, {
                     bitmap ->
                     if (bitmap != null) iv_show.setImageBitmap(bitmap)
                 })
@@ -50,7 +50,7 @@ class CardAddActivity : PhotoActivity() {
         iv_submit.setOnClickListener {
             if (cardInfoAvailable()) {
                 DBHelper.saveCardInfo(this@CardAddActivity, et_card_content.text.toString())
-                CardHelper.shareMsg(this, et_card_content.text.toString())
+                CardHelper.shareMsg(this, et_card_content.text.trim().toString())
             }
         }
 

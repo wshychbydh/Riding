@@ -31,7 +31,23 @@ class Passenger : BaseBmobObject() {
         return "Passenger(age='$age', name='$name', phone='$phone', sex=$sex, promise_not=$promise_not, by_count=$by_count, job='$job', remark='$remark')"
     }
 
-    fun showRemark(): String {
-        return "$name \n$remark"
+    fun blackList(): String {
+        return "黑名单=>$name \n备注：$remark"
+    }
+
+    fun call(): String {
+        if (remark.isNullOrEmpty()){
+            return "乘客去电=>$name"
+        } else {
+            return "乘客去电=>$name\n备注：$remark"
+        }
+    }
+
+    fun receive(): String {
+        if (remark.isNullOrEmpty()){
+            return "乘客来电=>$name"
+        } else {
+            return "乘客来电=>$name\n备注：$remark"
+        }
     }
 }

@@ -3,7 +3,6 @@ package cool.eye.ridding.zone.contacts
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import cn.bmob.v3.BmobQuery
@@ -50,7 +49,6 @@ class PassengerAddActivity : BaseActivity() {
             var phone = passenger_phone.text.toString()
             if (phone.isNullOrEmpty()) return@setOnClickListener
             startProgressDialog()
-            passenger_notice.visibility = View.GONE
             var query = BmobQuery<Passenger>()
             query.addWhereEqualTo("phone", phone)
             query.findObjects(object : FindListener<Passenger>() {
@@ -66,22 +64,17 @@ class PassengerAddActivity : BaseActivity() {
     }
 
     fun fillPassenger() {
-        if (passenger!!.remark.isNotEmpty()) {
-            passenger_notice.visibility = View.VISIBLE
-            passenger_notice.text = passenger!!.remark
-        } else if (passenger!!.by_count > 0) {
-            passenger_notice.visibility = View.VISIBLE
-            passenger_notice.text = "该乘客已乘坐${passenger!!.by_count}次"
-        }
+        passenger_by_count.setText(passenger!!.by_count.toString())
         passenger_name.setText(passenger!!.name)
         (radiogroup_sex.getChildAt(passenger!!.sex) as RadioButton).isChecked = true
         passenger_age.setText(passenger!!.age)
         passenger_phone.setText(passenger!!.phone)
         (radiogroup_blacklist.getChildAt(if (passenger!!.promise_not > 0) 1 else 0) as RadioButton).isChecked = true
+        passenger_remark.setText(passenger!!.remark)
     }
 
     fun submit() {
-        val name = passenger_name.text.toString()
+        val name = passenger_name.text.trim().toString()
         if (name.isNullOrEmpty()) {
             Toast.makeText(this, getString(R.string.name_empty), Toast.LENGTH_SHORT).show()
             return
@@ -91,7 +84,7 @@ class PassengerAddActivity : BaseActivity() {
             Toast.makeText(this, getString(R.string.sex_empty), Toast.LENGTH_SHORT).show()
             return
         }
-        val phone = passenger_phone.text.toString()
+        val phone = passenger_phone.text.trim().toString()
         if (phone.isNullOrEmpty()) {
             Toast.makeText(this, getString(R.string.phone_empty), Toast.LENGTH_SHORT).show()
             return
@@ -100,25 +93,27 @@ class PassengerAddActivity : BaseActivity() {
         if (passenger == null) passenger = Passenger()
         passenger!!.name = name
         passenger!!.sex = sex
-        passenger!!.age = passenger_age.text.toString()
-        passenger!!.job = passenger_job.text.toString()
+        passenger!!.age = passenger_age.text.trim().toString()
+        passenger!!.job = passenger_job.text.trim().toString()
         passenger!!.phone = phone
-        var byCount = passenger_by_count.text.toString()
+        var byCount = passenger_by_count.text.trim().toString()
         passenger!!.by_count = if (byCount.isNullOrEmpty()) 0 else byCount.toInt()
         var blackList = radiogroup_blacklist.indexOfChild(radiogroup_blacklist.findViewById(radiogroup_blacklist.checkedRadioButtonId))
-        println("-----blackList---->" + blackList)
         passenger!!.promise_not = if (blackList == 1) 1 else 0
+        passenger!!.remark = passenger_remark.text.trim().toString()
         savePassenger()
     }
 
     fun savePassenger() {
         startProgressDialog()
-        DBHelper.savePassenger(passenger!!)
+        DBHelper.get(this).savePassenger(passenger!!)
         if (passenger!!.objectId == null) {
             passenger!!.save(object : SaveListener<String?>() {
                 override fun done(p0: String?, p1: BmobException?) {
                     if (p1 == null) {
                         stopProgressDialog()
+                        setResult(1001)
+                        finish()
                     } else {
                         var bmobQuery = BmobQuery<Passenger>()
                         bmobQuery.addWhereEqualTo("phone", passenger!!.phone)
@@ -126,8 +121,8 @@ class PassengerAddActivity : BaseActivity() {
                             override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
                                 if (p1 == null) {
                                     passenger!!.objectId = p0!![0].objectId
-                                    passenger!!.promise_not += p0!![0].promise_not
-                                    passenger!!.by_count += p0!![0].by_count
+                                    passenger!!.promise_not += p0[0].promise_not
+                                    passenger!!.by_count += p0[0].by_count
                                     updatePassenger()
                                 } else {
                                     stopProgressDialog()

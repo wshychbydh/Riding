@@ -39,6 +39,10 @@ class RidingFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadData()
+    }
+
+    fun loadData() {
         startProgressDialog()
         var query = BmobQuery<CarryInfo>()
         query.addWhereEqualTo("status", CarryStatus.UNDERWAY.code)
@@ -64,9 +68,10 @@ class RidingFragment : BaseFragment() {
         riding_recyclerview.removeAllViews()
         carry_finished.visibility = View.GONE
         riding_status_tv.text = getString(R.string.car_submit_none)
+        riding_add.visibility = View.VISIBLE
         riding_add.text = getString(R.string.car_submit)
         riding_add.setOnClickListener {
-            startActivity(Intent(activity, CarryAddActivity::class.java))
+            CarryAddActivity.launch(this@RidingFragment, null)
         }
     }
 
@@ -81,21 +86,27 @@ class RidingFragment : BaseFragment() {
         carry_mark.visibility = if (carryInfo.mark.isNullOrEmpty()) View.GONE else View.VISIBLE
         carry_mark.text = carryInfo.mark
         carry_change.setOnClickListener {
-            CarryAddActivity.launch(activity, carryInfo)
+            CarryAddActivity.launch(this@RidingFragment, carryInfo)
         }
 
         riding_add.text = getString(R.string.passenger_add)
         riding_add.visibility = if (remainCount > 0) View.VISIBLE else View.GONE
         carry_finished.visibility = View.VISIBLE
         carry_finished.setOnClickListener {
-            carryInfo.status = CarryStatus.FINISHED.code
-            carryInfo.updateData(object : UpdateDataListener {
-                override fun onSucceed() {
-                    HomeActivity.reload(context, 0)
-                }
-            })
+            AlertDialog.Builder(context)
+                    .setMessage(getString(R.string.carry_finish_query))
+                    .setNegativeButton(getString(R.string.cancel), null)
+                    .setPositiveButton(getString(R.string.sure), { dialog, witch ->
+                        carryInfo.status = CarryStatus.FINISHED.code
+                        carryInfo.updateData(object : UpdateDataListener {
+                            override fun onSucceed() {
+                                showAddCarryView()
+                                (activity as HomeActivity).updateCarryHistoryView()
+                            }
+                        })
+                    }).show()
         }
-        riding_add.setOnClickListener { RidingAddActivity.launch(context, remainCount, carryInfo, null) }
+        riding_add.setOnClickListener { RidingAddActivity.launch(this@RidingFragment, remainCount, carryInfo, null) }
         riding_recyclerview.layoutManager = LinearLayoutManager(context)
         riding_recyclerview.itemAnimator = DefaultItemAnimator()
         riding_recyclerview.addItemDecoration(DividerDecoration(context))
@@ -122,7 +133,7 @@ class RidingFragment : BaseFragment() {
                         p0.forEach { riding -> count += riding.peopleCount }
                         remainCount = carryInfo.peopleCount - count
                         riding_add.visibility = if (remainCount > 0) View.VISIBLE else View.GONE
-                        riding_status_tv.text = Utils.formatColorOfStr(getString(R.string.passenger_take_count,count), resources.getColor(R.color.red), 2, 3)
+                        riding_status_tv.text = Utils.formatColorOfStr(getString(R.string.passenger_take_count, count), resources.getColor(R.color.red), 2, 3)
                     }
                 }
             }
@@ -153,11 +164,11 @@ class RidingFragment : BaseFragment() {
                 holder.view.riding_times.visibility = View.GONE
             }
             holder.view.riding_item_call.setOnClickListener {
-                Utils.callPhone(context, passenger.phone!!)
+                Utils.callPhone(context, passenger.phone)
             }
             holder.view.setOnClickListener {
                 //计算可用剩余人数
-                RidingAddActivity.launch(context, remainCount + ridings[position].peopleCount, carryInfo, ridings[position])
+                RidingAddActivity.launch(this@RidingFragment, remainCount + ridings[position].peopleCount, carryInfo, ridings[position])
             }
             holder.view.setOnLongClickListener {
                 AlertDialog.Builder(context)
@@ -166,7 +177,7 @@ class RidingFragment : BaseFragment() {
                             blackList(position)
                         })
                         .setNeutralButton(getString(R.string.cancel), null)
-                        .setPositiveButton(getString(R.string.sure), { dialog, witch ->
+                        .setPositiveButton(getString(R.string.delete), { dialog, witch ->
                             deleteRiding(position)
                         }).show()
                 false
@@ -181,9 +192,9 @@ class RidingFragment : BaseFragment() {
         fun blackList(position: Int) {
             val passenger = ridings[position].passenger
             passenger!!.promise_not++
-            passenger!!.by_count--
-            DBHelper.saveBlackList(passenger)
-            passenger!!.updateData(object : UpdateDataListener {
+            passenger.by_count--
+            DBHelper.get(context).saveBlackList(passenger)
+            passenger.updateData(object : UpdateDataListener {
                 override fun onSucceed() {
                     toast(getString(R.string.blacklist_add_succeed))
                     deleteRiding(position)
@@ -208,4 +219,11 @@ class RidingFragment : BaseFragment() {
     }
 
     open inner class RidingHolder(var view: View) : RecyclerView.ViewHolder(view)
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1001 && resultCode == 1001) {
+            loadData()
+        }
+    }
 }

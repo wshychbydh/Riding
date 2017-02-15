@@ -3,11 +3,30 @@ package cn.sudiyi.app.client.account.support
 import android.widget.EditText
 import android.widget.Toast
 import cool.eye.ridding.R
+import cool.eye.ridding.util.Utils
 
 /**
  * Created by cool on 16-6-20.
  */
 object InputChecker {
+
+    fun checkPhone(phoneEt: EditText): Boolean {
+        var phone = phoneEt.text.toString()
+        if (!Utils.isPhoneNumber(phone)) {
+            phoneEt.error = phoneEt.context.getString(R.string.account_phone_error)
+            return false
+        }
+        return true
+    }
+
+    fun checkEmail(emailEt: EditText): Boolean {
+        var email = emailEt.text.toString()
+        if (!Utils.isEmail(email)) {
+            emailEt.error = emailEt.context.getString(R.string.account_email_error)
+            return false
+        }
+        return true
+    }
 
     fun checkUsername(usernameEt: EditText): Boolean {
         var username = usernameEt.text

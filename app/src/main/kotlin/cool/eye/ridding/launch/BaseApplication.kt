@@ -1,4 +1,4 @@
-package cool.eye.ridding.ui
+package cool.eye.ridding.launch
 
 import android.app.Application
 import cn.bmob.v3.Bmob
@@ -25,7 +25,7 @@ class BaseApplication : Application() {
                 .setFileExpiration(2500)
                 .build()
         Bmob.initialize(config)
-
+  //      BmobUpdateAgent.initAppVersion() //据说只需要执行一次
         Fresco.initialize(this)
     }
 }

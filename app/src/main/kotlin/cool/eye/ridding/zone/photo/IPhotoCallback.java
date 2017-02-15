@@ -1,4 +1,4 @@
-package cool.eye.ridding.zone.helper;
+package cool.eye.ridding.zone.photo;
 
 import android.graphics.Bitmap;
 

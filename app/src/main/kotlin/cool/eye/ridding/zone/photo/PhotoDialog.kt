@@ -1,4 +1,4 @@
-package cool.eye.ridding.zone.ui
+package cool.eye.ridding.zone.photo
 
 import android.app.Dialog
 import android.os.Bundle

@@ -1,8 +1,5 @@
 package cool.eye.ridding.ui
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.SparseArray
@@ -22,31 +19,31 @@ class HomeActivity : BaseActivity() {
         initView(0)
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        resetView(intent?.getIntExtra(SELECTION, 0) ?: 0)
-    }
-
-    companion object {
-        const val SELECTION = "selection"
-        fun launch(activity: Activity, selection: Int) {
-            reload(activity, selection)
-            activity.finish()
-        }
-
-        fun reload(context: Context, selection: Int) {
-            var intent = Intent(context, HomeActivity::class.java)
-            intent.putExtra(SELECTION, selection)
-            context.startActivity(intent)
-        }
-    }
+//    override fun onNewIntent(intent: Intent?) {
+//        super.onNewIntent(intent)
+//        resetView(intent?.getIntExtra(SELECTION, 0) ?: 0)
+//    }
+//
+//    companion object {
+//        const val SELECTION = "selection"
+//        fun launch(activity: Activity, selection: Int) {
+//            reload(activity, selection)
+//            activity.finish()
+//        }
+//
+//        fun reload(context: Context, selection: Int) {
+//            var intent = Intent(context, HomeActivity::class.java)
+//            intent.putExtra(SELECTION, selection)
+//            context.startActivity(intent)
+//        }
+//    }
 
     fun initView(selection: Int) {
         radiogroup.setOnCheckedChangeListener { radioGroup, i ->
-            var selection = radioGroup.indexOfChild(radioGroup.findViewById(i))
-            var fragment = fragments.get(selection)
+            var index = radioGroup.indexOfChild(radioGroup.findViewById(i))
+            var fragment = fragments.get(index)
             if (fragment == null) {
-                fragment = when (selection) {
+                fragment = when (index) {
                     0 -> RidingFragment()
                     1 -> CarryFragment()
                     2 -> UserZoneFragment()
@@ -54,29 +51,36 @@ class HomeActivity : BaseActivity() {
                         RidingFragment()
                     }
                 }
-                fragments.put(selection, fragment)
+                fragments.put(index, fragment)
             }
             addFragment(fragment)
         }
         (radiogroup.getChildAt(selection) as RadioButton).isChecked = true
     }
 
-    private fun resetView(selection: Int) {
-        radiogroup.setOnCheckedChangeListener(null)
-        radiogroup.clearCheck()
-        oldFragment = null
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        var fragment: Fragment
-        for (i in 0..fragments.size() - 1) {
-            fragment = fragments.valueAt(i)
-            if (fragment != null && fragment.isAdded) {
-                fragmentTransaction.remove(fragment)
-            }
+    fun updateCarryHistoryView(){
+        val fragment = fragments.get(1)
+        if (fragment != null){
+            (fragment as CarryFragment).loadCarryInfo()
         }
-        fragmentTransaction.commitAllowingStateLoss()
-        fragments.clear()
-        initView(selection)
     }
+
+//    private fun resetView(selection: Int) {
+//        radiogroup.setOnCheckedChangeListener(null)
+//        radiogroup.clearCheck()
+//        oldFragment = null
+//        val fragmentTransaction = supportFragmentManager.beginTransaction()
+//        var fragment: Fragment
+//        for (i in 0..fragments.size() - 1) {
+//            fragment = fragments.valueAt(i)
+//            if (fragment != null && fragment.isAdded) {
+//                fragmentTransaction.remove(fragment)
+//            }
+//        }
+//        fragmentTransaction.commitAllowingStateLoss()
+//        fragments.clear()
+//        initView(selection)
+//    }
 
     private fun addFragment(newFragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()

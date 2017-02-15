@@ -30,10 +30,14 @@
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/sure"
-                style="@style/style_button_border"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="30dp"
-                android:text="确定"/>
+                android:padding="@dimen/margin_b"
+                android:background="@drawable/bg_btn_border_green"
+                android:text="确定"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_s"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

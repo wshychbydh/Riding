@@ -48,7 +48,7 @@ class PassengerFragment : BaseFragment() {
             getPassengers(type)
         } else {
             var result = kotlin.run {
-                if (type == BLACK_LIST) DBHelper.getBlackList() else DBHelper.getPassengers()
+                if (type == BLACK_LIST) DBHelper.get(context).getBlackList() else DBHelper.get(context).getPassengers()
             }
             refreshView.onLoadData(result)
         }
@@ -64,15 +64,15 @@ class PassengerFragment : BaseFragment() {
         } else {
             query.addWhereEqualTo("promise_not", 0)
         }
-        query.order("-by_count,-promise_not")
+        query.order("-by_count,-promise_not,updatedAt")
         query.findObjects(object : FindListener<Passenger>() {
             override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
                 if (p0?.isNotEmpty() ?: false) {
                     Thread(Runnable {
                         if (type == BLACK_LIST) {
-                            DBHelper.saveBlackList(p0!!)
+                            DBHelper.get(context).saveBlackList(p0!!)
                         } else {
-                            DBHelper.savePassengers(p0!!)
+                            DBHelper.get(context).savePassengers(p0!!)
                         }
                     }).start()
                     refreshView.onLoadData(p0!!)
@@ -85,7 +85,7 @@ class PassengerFragment : BaseFragment() {
     inner class PassengerAdapter(var passengers: MutableList<Passenger>) : RecyclerView.Adapter<PassengerHolder>() {
 
         override fun getItemCount(): Int {
-            return passengers?.size
+            return passengers.size
         }
 
         override fun onBindViewHolder(holder: PassengerHolder, position: Int) {

@@ -36,7 +36,7 @@
     <uses-feature android:name="android.hardware.camera.flash"/>
 
     <application
-        android:name=".ui.BaseApplication"
+        android:name=".launch.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -62,8 +62,11 @@
         <activity
             android:name=".login.ui.RegisterActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".login.ui.SetPasswordActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ui.AddressActivity"/>
-        <activity android:name=".ui.LoadingActivity">
+        <activity android:name=".launch.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -83,6 +86,13 @@
         <activity
             android:name=".zone.contacts.PassengerAddActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name="cn.bmob.v3.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="cn.sudiyi.app.client.account.page.FeedbackActivity"/>
+        <activity android:name=".zone.about.AboutActivity">
+        </activity>
+        <activity android:name=".zone.userinfo.UserInfoActivity"/>
     </application>
 
 </manifest>

@@ -31,4 +31,18 @@
         android:background="@color/colorPrimaryDark"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/margin_b"/>
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/margin_b"
+        android:text="提交"
+        android:textColor="@color/selector_white_text"
+        android:textSize="@dimen/content_b"
+        android:visibility="gone"/>
 </RelativeLayout>

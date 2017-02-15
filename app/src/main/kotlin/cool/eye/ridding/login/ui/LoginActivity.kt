@@ -1,5 +1,6 @@
 package cool.eye.ridding.login.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import cn.bmob.v3.BmobUser
@@ -15,9 +16,22 @@ import kotlinx.android.synthetic.main.common_title.*
 
 class LoginActivity : BaseActivity() {
 
+    companion object {
+        const val USERNAME = "username"
+        const val PASSWORD = "password"
+        fun launch(activity: Activity, username: String?, password: String?) {
+            var intent = Intent(activity, LoginActivity::class.java)
+            intent.putExtra(USERNAME, username)
+            intent.putExtra(PASSWORD, password)
+            activity.startActivity(intent)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        et_username.setText(intent.getStringExtra(USERNAME))
+        et_password.setText(intent.getStringExtra(PASSWORD))
         iv_back.setOnClickListener { finish() }
         tv_title.text = getString(R.string.account_login)
         btn_login.setOnClickListener { login() }
@@ -37,9 +51,10 @@ class LoginActivity : BaseActivity() {
                         //通过BmobUser user = BmobUser.getCurrentUser()获取登录成功后的本地用户信息
                         //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(MyUser.class)获取自定义用户信息
                         toast(getString(R.string.account_login_success))
-                        HomeActivity.launch(this@LoginActivity, 0)
+                        startActivity(Intent(this@LoginActivity,HomeActivity::class.java))
+                        finish()
                     } else {
-                        toast(p1?.message ?: "")
+                        toast(p1.message ?: "")
                     }
                 }
             })

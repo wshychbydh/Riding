@@ -1,6 +1,5 @@
 package cool.eye.ridding.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.AppCompatEditText
@@ -38,21 +37,21 @@ class RidingAddActivity : BaseActivity() {
         const val CARRY_INFO = "carry_info"
         const val RIDING_INFO = "riding_info"
 
-        fun launch(context: Context, remainCount: Int, carryInfo: CarryInfo, riding: Riding?) {
-            var intent = Intent(context, RidingAddActivity::class.java)
+        fun launch(fragment: RidingFragment, remainCount: Int, carryInfo: CarryInfo, riding: Riding?) {
+            var intent = Intent(fragment.context, RidingAddActivity::class.java)
             intent.putExtra(REMAIN_COUNT, remainCount)
             intent.putExtra(CARRY_INFO, carryInfo)
             if (riding != null) {
                 intent.putExtra(RIDING_INFO, riding)
             }
-            context.startActivity(intent)
+            fragment.startActivityForResult(intent, 1001)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_riding)
-        tv_title.text = getString(R.string.passenger_add)
+        tv_title.text = getString(R.string.riding_add)
         iv_back.setOnClickListener { finish() }
         submit.setOnClickListener { submit() }
         ridding_time.setOnClickListener {
@@ -92,7 +91,7 @@ class RidingAddActivity : BaseActivity() {
         people_count.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, peopleCount)
 
         carryInfo = intent.getSerializableExtra(CARRY_INFO) as CarryInfo
-        riding = intent.getSerializableExtra(RIDING_INFO) as Riding
+        riding = intent.getSerializableExtra(RIDING_INFO) as? Riding
 
         if (riding == null) {
             start_address.setTextAndSelectEnd(carryInfo.startAddress!!)
@@ -139,7 +138,7 @@ class RidingAddActivity : BaseActivity() {
     }
 
     fun submit() {
-        val name = passenger_name.text.toString()
+        val name = passenger_name.text.trim().toString()
         if (name.isNullOrEmpty()) {
             Toast.makeText(this, getString(R.string.name_empty), Toast.LENGTH_SHORT).show()
             return
@@ -150,17 +149,17 @@ class RidingAddActivity : BaseActivity() {
             return
         }
 
-        val startAds = start_address.text.toString()
+        val startAds = start_address.text.trim().toString()
         if (startAds.isNullOrEmpty()) {
             Toast.makeText(this, getString(R.string.start_address_empty), Toast.LENGTH_SHORT).show()
             return
         }
-        val endAds = end_address.text.toString()
+        val endAds = end_address.text.trim().toString()
         if (endAds.isNullOrEmpty()) {
             Toast.makeText(this, getString(R.string.end_address_empty), Toast.LENGTH_SHORT).show()
             return
         }
-        val phone = passenger_phone.text.toString()
+        val phone = passenger_phone.text.trim().toString()
         if (phone.isNullOrEmpty() || !Utils.isPhoneNumberValid(phone)) {
             Toast.makeText(this, getString(R.string.phone_empty), Toast.LENGTH_SHORT).show()
             return
@@ -208,8 +207,8 @@ class RidingAddActivity : BaseActivity() {
                             override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
                                 if (p1 == null) {
                                     riding.passenger!!.objectId = p0!![0].objectId
-                                    riding.passenger!!.promise_not = p0!![0].promise_not
-                                    riding.passenger!!.by_count = p0!![0].by_count + 1
+                                    riding.passenger!!.promise_not = p0[0].promise_not
+                                    riding.passenger!!.by_count = p0[0].by_count + 1
                                     updatePassenger(riding.passenger!!)
                                     saveRiding(riding)
                                 } else {
@@ -239,14 +238,16 @@ class RidingAddActivity : BaseActivity() {
             riding.saveData(object : SaveDataListener {
                 override fun onSucceed(objectId: String) {
                     toast(getString(R.string.riding_add_succeed))
-                    HomeActivity.launch(this@RidingAddActivity, 0)
+                    setResult(1001)
+                    finish()
                 }
             })
         } else {
             riding.updateData(object : UpdateDataListener {
                 override fun onSucceed() {
                     toast(getString(R.string.riding_update_succeed))
-                    HomeActivity.launch(this@RidingAddActivity, 0)
+                    setResult(1001)
+                    finish()
                 }
             })
         }

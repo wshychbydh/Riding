@@ -4,99 +4,166 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:layout_centerInParent="true"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/mine"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_b"/>
+
+        <cool.eye.ridding.widget.StatedImageView
+            android:id="@+id/setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:src="@drawable/ic_setting"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="@string/mine"
-        android:textColor="@color/white"
-        android:textSize="@dimen/title_b"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@color/colorPrimaryDark">
+        android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/draweeview"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/margin"
             fresco:actualImageScaleType="center"
             fresco:placeholderImage="@mipmap/ic_launcher"
             fresco:placeholderImageScaleType="fitCenter"
             fresco:roundAsCircle="true"
             fresco:roundingBorderColor="@color/border"
             fresco:roundingBorderWidth="12px"/>
-    </FrameLayout>
 
-    #
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"/>
+    </LinearLayout>
 
-    <View
-        style="@style/divider_line_1px"
-        android:layout_marginTop="@dimen/margin"/>
-
-    <TextView
-        android:id="@+id/card"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn_white"
-        android:drawableRight="@drawable/icon_arrow"
-        android:padding="@dimen/margin_b"
-        android:text="@string/card_image"/>
+        android:layout_height="wrap_content">
 
-    <View style="@style/divider_line_1px"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/scan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn_white"
-        android:drawableRight="@drawable/icon_arrow"
-        android:padding="@dimen/margin_b"
-        android:text="@string/scan"/>
+            <View
+                style="@style/divider_line_1px"
+                android:layout_marginTop="@dimen/margin"/>
 
-    <View style="@style/divider_line_1px"/>
+            <TextView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:drawableRight="@drawable/icon_arrow"
+                android:padding="@dimen/margin_b"
+                android:text="@string/card_image"/>
 
-    <View
-        style="@style/divider_line_1px"
-        android:layout_marginTop="@dimen/margin"/>
+            <View style="@style/divider_line_1px"/>
 
-    <TextView
-        android:id="@+id/book"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn_white"
-        android:drawableRight="@drawable/icon_arrow"
-        android:padding="@dimen/margin_b"
-        android:text="@string/contacts"/>
+            <TextView
+                android:id="@+id/scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:drawableRight="@drawable/icon_arrow"
+                android:padding="@dimen/margin_b"
+                android:text="@string/scan"/>
 
-    <View style="@style/divider_line_1px"/>
+            <View style="@style/divider_line_1px"/>
 
-    <TextView
-        android:id="@+id/black_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn_white"
-        android:drawableRight="@drawable/icon_arrow"
-        android:padding="@dimen/margin_b"
-        android:text="@string/black_list"/>
+            <View
+                style="@style/divider_line_1px"
+                android:layout_marginTop="@dimen/margin"/>
 
-    <View style="@style/divider_line_1px"/>
+            <TextView
+                android:id="@+id/book"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:drawableRight="@drawable/icon_arrow"
+                android:padding="@dimen/margin_b"
+                android:text="@string/contacts"/>
 
-    <View
-        style="@style/divider_line_1px"
-        android:layout_marginTop="@dimen/margin"/>
+            <View style="@style/divider_line_1px"/>
 
-    <TextView
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn_white"
-        android:gravity="center"
-        android:padding="@dimen/margin_b"
-        android:text="@string/logout"/>
+            <TextView
+                android:id="@+id/black_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:drawableRight="@drawable/icon_arrow"
+                android:padding="@dimen/margin_b"
+                android:text="@string/black_list"/>
+
+            <View style="@style/divider_line_1px"/>
+
+            <View
+                style="@style/divider_line_1px"
+                android:layout_marginTop="@dimen/margin"/>
+
+            <TextView
+                android:id="@+id/password_modify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:drawableRight="@drawable/icon_arrow"
+                android:padding="@dimen/margin_b"
+                android:text="@string/account_password_modify"/>
+
+            <View style="@style/divider_line_1px"/>
+
+            <TextView
+                android:id="@+id/feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:drawableRight="@drawable/icon_arrow"
+                android:padding="@dimen/margin_b"
+                android:text="@string/account_feedback"/>
+
+            <View style="@style/divider_line_1px"/>
+
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:drawableRight="@drawable/icon_arrow"
+                android:padding="@dimen/margin_b"
+                android:text="@string/account_about"/>
+
+            <View style="@style/divider_line_1px"/>
+
+            <View
+                style="@style/divider_line_1px"
+                android:layout_marginTop="@dimen/margin"/>
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:gravity="center"
+                android:padding="@dimen/margin_b"
+                android:text="@string/logout"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
+

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/windowBackground"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="9dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/padding_l">.
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_feedback_type"
+            android:textColor="@color/content"
+            android:textSize="15dp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/feedback_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_down_arrow"
+            android:padding="@dimen/padding_l"
+            android:textColor="@color/black"
+            android:textSize="15dp"/>
+    </LinearLayout>
+
+    <View
+        style="@style/divider_line_1px"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="9dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/margin_s"
+        android:paddingLeft="@dimen/padding_l"
+        android:paddingRight="@dimen/padding_l"
+        android:paddingTop="@dimen/margin_s">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/feedback_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="@string/account_feedback_limit"
+            android:inputType="textMultiLine"
+            android:maxLength="200"
+            android:minHeight="180dp"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/feedback_content_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="16dp"
+            android:textSize="11dp"/>
+    </FrameLayout>
+
+    <View
+        style="@style/divider_line_1px"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="9dp"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/feedback_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/account_feedback_contacts"
+        android:padding="@dimen/margin"/>
+
+    <View
+        style="@style/divider_line_1px"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="9dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_contacts"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/feedback_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="email"
+            android:text="@string/account_qq"/>
+    </LinearLayout>
+</LinearLayout>

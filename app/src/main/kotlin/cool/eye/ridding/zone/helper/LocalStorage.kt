@@ -21,7 +21,7 @@ object LocalStorage {
 
     const val CARD = "card" // 大图
     const val QR = "qr" // 二维码
-    const val PHOTO = "photo" // 二维码
+    const val PHOTO = "photo" // 拍照
     const val LOCAL_DIR = "riding"
 
     const val FILE = "file"
@@ -44,7 +44,7 @@ object LocalStorage {
     // create image storage path
     fun composeCardImage(name: String): String {
         val sb = composeCardImageDir()
-        sb.append(File.separator).append(name).append(IMAGE_SUFF)
+        sb.append(File.separator).append(name)
         return sb.toString()
     }
 
@@ -62,7 +62,7 @@ object LocalStorage {
     // create image storage path
     fun composeQrImage(name: String): String {
         val sb = composeQrImageDir()
-        sb.append(File.separator).append(name).append(IMAGE_SUFF)
+        sb.append(File.separator).append(name)
         return sb.toString()
     }
 
@@ -80,7 +80,7 @@ object LocalStorage {
     // create image storage path
     fun composePhotoImage(name: String): String {
         val sb = composePhotoImageDir()
-        sb.append(File.separator).append(name).append(IMAGE_SUFF)
+        sb.append(File.separator).append(name)
         return sb.toString()
     }
 
@@ -121,6 +121,6 @@ object LocalStorage {
     @JvmStatic fun composePhotoImageFile(): String {
         var dir = File(composePhotoImageDir().toString())
         if (!dir.exists()) dir.mkdirs()
-        return composeCardImage("$PHOTO_PRE${System.currentTimeMillis()}$IMAGE_SUFF")
+        return composePhotoImage("$PHOTO_PRE${System.currentTimeMillis()}$IMAGE_SUFF")
     }
 }

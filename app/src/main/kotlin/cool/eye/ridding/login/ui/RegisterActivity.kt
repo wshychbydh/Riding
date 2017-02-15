@@ -7,7 +7,6 @@ import cn.sudiyi.app.client.account.support.InputChecker
 import cool.eye.ridding.R
 import cool.eye.ridding.login.model.UserModel
 import cool.eye.ridding.ui.BaseActivity
-import cool.eye.ridding.ui.HomeActivity
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.common_title.*
 
@@ -27,18 +26,18 @@ class RegisterActivity : BaseActivity() {
             var user = UserModel()
             user.username = et_username.text.toString()
             user.setPassword(et_password.text.toString())
-            user.signUp(object : SaveListener<UserModel>() {
-                override fun done(user: UserModel, exception: BmobException?) {
+            user.signUp(object : SaveListener<UserModel?>() {
+                override fun done(user: UserModel?, exception: BmobException?) {
                     stopProgressDialog()
                     if (exception == null) {
                         toast(getString(R.string.account_register_success))
-                        HomeActivity.launch(this@RegisterActivity, 0)
+                        LoginActivity.launch(this@RegisterActivity, et_username.text.toString(), et_password.text.toString())
+                        finish()
                     } else {
-                        toast(exception?.message ?: "")
+                        toast(exception.message ?: "")
                     }
                 }
             })
-
         }
     }
 
