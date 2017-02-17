@@ -93,6 +93,7 @@
         <activity android:name=".zone.about.AboutActivity">
         </activity>
         <activity android:name=".zone.userinfo.UserInfoActivity"/>
+        <activity android:name=".zone.card.ui.ScanResultActivity"/>
     </application>
 
 </manifest>

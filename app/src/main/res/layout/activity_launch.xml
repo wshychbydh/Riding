@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="50dp"
-
         android:gravity="center"
         android:text="如对软件有任何意见或建议，请在及时反馈给开发者．"
         android:textSize="20dp"/>

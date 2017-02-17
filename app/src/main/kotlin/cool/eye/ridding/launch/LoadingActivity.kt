@@ -4,14 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.v7.app.AppCompatActivity
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.update.BmobUpdateAgent
 import cool.eye.ridding.R
+import cool.eye.ridding.crash.CrashHelper
 import cool.eye.ridding.login.ui.LoginActivity
+import cool.eye.ridding.ui.BaseActivity
 import cool.eye.ridding.ui.HomeActivity
 
-class LoadingActivity : AppCompatActivity() {
+class LoadingActivity : BaseActivity() {
 
     var isJumped: Boolean = false
 
@@ -27,6 +28,7 @@ class LoadingActivity : AppCompatActivity() {
         }
         BmobUpdateAgent.update(this)
         handler.sendEmptyMessageDelayed(0, 5000)
+        CrashHelper.uploadAllCrash(this)
     }
 
     fun doNext() {

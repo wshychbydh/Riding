@@ -39,8 +39,6 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
         PreviewFrameShotListener, DecodeListener,
         OnCheckedChangeListener, OnClickListener {
 
-    public static final String EXTRA_RESULT = "result";
-    public static final String EXTRA_BITMAP = "bitmap";
     private static final long VIBRATE_DURATION = 200L;
     private static final int REQUEST_CODE_ALBUM = 0;
     private SurfaceView previewSv;
@@ -156,11 +154,12 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
             bitmap.recycle();
             bitmap = resizeBmp;
         }
-        Intent resultData = new Intent();
-        resultData.putExtra(EXTRA_RESULT, result.getText());
-        resultData.putExtra(EXTRA_BITMAP, bitmap);
-        setResult(RESULT_OK, resultData);
-        finish();
+        ScanResultActivity.launch(this, bitmap, result.getText());
+//        Intent resultData = new Intent();
+//        resultData.putExtra(EXTRA_RESULT, result.getText());
+//        resultData.putExtra(EXTRA_BITMAP, bitmap);
+//        setResult(RESULT_OK, resultData);
+//        finish();
     }
 
     @Override
@@ -204,7 +203,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
                 finish();
                 break;
             case R.id.btn_album:
-                Intent intent = null;
+                Intent intent;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                     intent = new Intent(Intent.ACTION_GET_CONTENT);
                 } else {
@@ -223,12 +222,13 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_ALBUM && resultCode == RESULT_OK && data != null) {
-            Bitmap cameraBitmap = null;
+            Bitmap cameraBitmap;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 String path = DocumentUtil.getPath(CaptureActivity.this, data.getData());
                 cameraBitmap = DocumentUtil.getBitmap(path);
             } else {
                 // Not supported in SDK lower that KitKat
+                return;
             }
             if (cameraBitmap != null) {
                 if (mDecodeThread != null) {

@@ -2,6 +2,7 @@ package cool.eye.ridding.zone.helper
 
 import android.content.Context
 import android.os.Environment
+import android.os.Looper
 import java.io.File
 
 /**
@@ -24,20 +25,29 @@ object LocalStorage {
     const val PHOTO = "photo" // 拍照
     const val LOCAL_DIR = "riding"
 
-    const val FILE = "file"
-    val CARD_PRE = "card_"
-    val QR_PRE = "qr_"
-    val PHOTO_PRE = "photo_"
-    val IMAGE_SUFF = ".jpg"
+    const val CRASH = "crash"
+    const val CARD_PRE = "card_"
+    const val QR_PRE = "qr_"
+    const val PHOTO_PRE = "photo_"
+    const val IMAGE_SUFF = ".jpg"
+    const val CRASH_PRE = "crash_"
+    const val CRASH_SUFF = ".crash"
 
     // create file storage dir
-    fun composeFileDir(): String {
+    @JvmStatic fun composeCrashFileDir(): StringBuilder {
         val sb = StringBuilder()
         sb.append(android.os.Environment.getExternalStorageDirectory())
         sb.append(File.separator)
         sb.append(LOCAL_DIR)
         sb.append(File.separator)
-        sb.append(FILE)
+        sb.append(CRASH)
+        return sb
+    }
+
+    // create file storage path
+    fun composeCrashFile(name: String): String {
+        val sb = composeCrashFileDir()
+        sb.append(File.separator).append(name)
         return sb.toString()
     }
 
@@ -122,5 +132,17 @@ object LocalStorage {
         var dir = File(composePhotoImageDir().toString())
         if (!dir.exists()) dir.mkdirs()
         return composePhotoImage("$PHOTO_PRE${System.currentTimeMillis()}$IMAGE_SUFF")
+    }
+
+    @JvmStatic fun createCrashFile(): File {
+        var dir = File(composeCrashFileDir().toString())
+        if (!dir.exists()) dir.mkdirs()
+        var name: String
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            name = "MainThread_${System.currentTimeMillis()}$CRASH_SUFF"
+        } else {
+            name = "ChildThread_${System.currentTimeMillis()}$CRASH_SUFF"
+        }
+        return File(composeCrashFile(name))
     }
 }

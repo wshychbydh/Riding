@@ -44,6 +44,7 @@ class AddressActivity : BaseActivity() {
         startProgressDialog()
         var query = BmobQuery<Address>()
         query.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
+        query.setLimit(20)
         query.order("-carryCount,-ridingCount")
         query.findObjects(object : FindListener<Address>() {
             override fun done(p0: MutableList<Address>?, p1: BmobException?) {
