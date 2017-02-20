@@ -6,7 +6,6 @@
 
     <include layout="@layout/common_title"/>
 
-
     <TextView
         android:id="@+id/people_total"
         android:layout_width="match_parent"

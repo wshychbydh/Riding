@@ -4,16 +4,20 @@
     android:id="@+id/activity_add_riding"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/windowBackground"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include layout="@layout/common_title"/>
 
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="@dimen/margin"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/margin"
@@ -26,7 +30,7 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/carry_start_address"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="@string/stat_address_input"
             android:inputType="text"
@@ -43,9 +47,12 @@
             android:textColor="@color/selector_green_text"/>
     </LinearLayout>
 
+    <View style="@style/divider_line_1px"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/margin"
@@ -58,7 +65,7 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/carry_end_address"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="@string/end_address_input"
             android:inputType="text"
@@ -75,11 +82,12 @@
             android:textColor="@color/selector_green_text"/>
     </LinearLayout>
 
+    <View style="@style/divider_line_1px"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding"
-        android:layout_marginTop="@dimen/margin"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/margin"
         android:paddingRight="@dimen/padding">
@@ -91,16 +99,24 @@
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/carry_go_off"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/icon_arrow"
+            android:gravity="center_vertical"
             android:hint="@string/time_input"
             android:textColor="@color/content"
             android:textSize="@dimen/content"/>
     </LinearLayout>
 
+    <View style="@style/divider_line_1px"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="@dimen/margin"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/margin"
         android:paddingRight="@dimen/padding">
@@ -112,10 +128,10 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/carry_people_count"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:inputType="phone"
-            android:minWidth="50dp"
+            android:minWidth="60dp"
             android:paddingLeft="@dimen/margin"
             android:paddingRight="@dimen/margin"
             android:text="4"/>
@@ -126,9 +142,12 @@
             android:text="人"/>
     </LinearLayout>
 
+    <View style="@style/divider_line_1px"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/margin"
         android:paddingRight="@dimen/padding">
@@ -144,7 +163,7 @@
             android:gravity="center"
             android:inputType="number"
             android:lines="1"
-            android:minWidth="50dp"
+            android:minWidth="60dp"
             android:paddingLeft="@dimen/margin"
             android:paddingRight="@dimen/margin"
             android:text="60"/>
@@ -155,9 +174,13 @@
             android:text="元/人"/>
     </LinearLayout>
 
+    <View style="@style/divider_line_1px"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/margin"
         android:paddingRight="@dimen/padding">
@@ -169,15 +192,22 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/carry_phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="phone"
             android:lines="1"
             android:maxLength="11"/>
     </LinearLayout>
 
+    <View style="@style/divider_line_1px"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="@dimen/margin"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/margin"
         android:paddingRight="@dimen/padding">
@@ -194,7 +224,9 @@
             android:hint="@string/mark_input"
             android:inputType="textMultiLine"
             android:lines="3"
-            android:maxLength="150"/>
+            android:maxLength="150"
+            android:paddingBottom="@dimen/margin_b"
+            android:paddingTop="@dimen/margin_b"/>
     </LinearLayout>
 
     <android.support.v7.widget.AppCompatButton

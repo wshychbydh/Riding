@@ -1,43 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/windowBackground"
-              android:gravity="center_horizontal"
-              android:orientation="vertical">
 
-    <include layout="@layout/dialog_common_title"/>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/windowBackground">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-            <DatePicker
-                android:id="@+id/date_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TimePicker
-                android:id="@+id/time_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/sure"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                android:padding="@dimen/margin_b"
-                android:background="@drawable/bg_btn_border_green"
-                android:text="确定"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_s"/>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/address_name"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          android:padding="@dimen/margin_b"
-          android:background="@drawable/bg_btn_white"
-          android:textColor="@color/title"
-          android:textSize="@dimen/content_b"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white"
+                android:padding="@dimen/margin">
+
+    <TextView
+        android:id="@+id/address_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin"
+        android:textColor="@color/title"
+        android:textSize="@dimen/content_b"/>
+
+    <TextView
+        android:id="@+id/address_carry_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/address_name"
+        android:textSize="@dimen/content_s"/>
+
+    <TextView
+        android:id="@+id/address_riding_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/address_name"
+        android:textSize="@dimen/content_s"/>
+</RelativeLayout>

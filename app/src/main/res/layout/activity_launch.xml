@@ -17,7 +17,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="欢迎使用拼车软件"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20dp"/>
 
     <TextView
@@ -27,5 +27,6 @@
         android:layout_margin="50dp"
         android:gravity="center"
         android:text="如对软件有任何意见或建议，请在及时反馈给开发者．"
+        android:textColor="@color/white"
         android:textSize="20dp"/>
 </LinearLayout>

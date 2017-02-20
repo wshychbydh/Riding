@@ -67,8 +67,11 @@ class AddressActivity : BaseActivity() {
         }
 
         override fun onBindViewHolder(holder: AddressHolder, position: Int) {
-            holder.view.address_name.text = addressList[position].name
-            holder.view.address_name.setOnClickListener {
+            var address = addressList[position]
+            holder.view.address_name.text = address.name
+            holder.view.address_carry_count.text = "发车${address.carryCount}次"
+            holder.view.address_riding_count.text = "乘坐${address.ridingCount}次"
+            holder.view.setOnClickListener {
                 var intent = Intent()
                 intent.putExtra(ADDRESS, addressList[position].name!!)
                 setResult(REQUEST_CODE, intent)

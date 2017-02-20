@@ -51,13 +51,13 @@ class CarryAddActivity : BaseActivity() {
         }
 
         carry_go_off.setOnClickListener {
-            var dialog = DatePickerDialog(this)
+            var dialog = DatePickerDialog()
             dialog.onDateSelectedListener = {
                 time ->
                 carry_go_off.text = time
             }
             dialog.currentTime = carry_go_off.text.toString()
-            dialog.show()
+            dialog.show(supportFragmentManager,null)
         }
         carry_save.setOnClickListener { save() }
 

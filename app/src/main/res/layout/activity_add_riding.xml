@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
     android:orientation="vertical"
-    tools:context=".zone.contacts.RidingAddActivity">
+    tools:context=".ui.RidingAddActivity">
 
     <include
         android:id="@+id/title_layout"
@@ -43,7 +43,7 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/passenger_name"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:inputType="text"
                     android:lines="1"
                     android:text="乘客"/>
@@ -51,7 +51,7 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/passenger_job"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/margin_large"
                     android:hint="职业"
                     android:inputType="text"
@@ -96,7 +96,7 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/passenger_age"
                     android:layout_width="60dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/margin_large"
                     android:gravity="center"
                     android:hint="年龄"
@@ -107,8 +107,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/content_s"
-                    android:text="岁"/>
+                    android:text="岁"
+                    android:textSize="@dimen/content_s"/>
             </LinearLayout>
 
             <View style="@style/divider_line_1px"/>
@@ -134,7 +134,7 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/start_address"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:hint="@string/stat_address_input"
                     android:inputType="text"
@@ -169,7 +169,7 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/end_address"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:hint="@string/end_address_input"
                     android:inputType="text"
@@ -203,7 +203,9 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/ridding_time"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center_vertical"
                     android:hint="点击选择时间"
                     android:textColor="@color/content"/>
             </LinearLayout>
@@ -256,7 +258,7 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:inputType="phone"
                     android:lines="1"
@@ -289,7 +291,7 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/passenger_phone"
                     android:layout_width="140dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:hint="@string/phone_input"
                     android:inputType="phone"
                     android:lines="1"
@@ -342,12 +344,14 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/riding_mark"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="top|left"
                     android:hint="@string/mark_input"
                     android:inputType="textMultiLine"
                     android:lines="3"
-                    android:maxLength="150"/>
+                    android:maxLength="150"
+                    android:paddingBottom="@dimen/margin_b"
+                    android:paddingTop="@dimen/margin_b"/>
             </LinearLayout>
 
             <View style="@style/divider_line_1px"/>

@@ -55,13 +55,13 @@ class RidingAddActivity : BaseActivity() {
         iv_back.setOnClickListener { finish() }
         submit.setOnClickListener { submit() }
         ridding_time.setOnClickListener {
-            var dialog = DatePickerDialog(this)
+            var dialog = DatePickerDialog()
             dialog.onDateSelectedListener = {
                 time ->
                 ridding_time.text = time
             }
             dialog.currentTime = ridding_time.text.toString()
-            dialog.show()
+            dialog.show(supportFragmentManager,null)
         }
         start_address_common.setOnClickListener {
             setAddress(start_address)

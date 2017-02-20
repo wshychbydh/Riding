@@ -5,6 +5,7 @@
     android:id="@+id/activity_scan_result"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="cool.eye.ridding.zone.card.ui.ScanResultActivity">
 

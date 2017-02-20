@@ -33,7 +33,7 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/passenger_name"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="text"
             android:lines="1"
             android:text="乘客"/>
@@ -93,13 +93,13 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/passenger_age"
             android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:hint="年龄"
-            android:text="11"
             android:inputType="phone"
             android:lines="1"
-            android:maxLength="2"/>
+            android:maxLength="2"
+            android:text="11"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/passenger_job"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="点击输入职业"
             android:inputType="text"
             android:lines="1"/>
@@ -149,7 +149,7 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/passenger_phone"
             android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="@string/phone_input"
             android:inputType="phone"
             android:lines="1"
@@ -163,8 +163,7 @@
             android:layout_marginLeft="@dimen/margin_large"
             android:lines="1"
             android:nestedScrollingEnabled="true"
-            android:paddingBottom="@dimen/margin"
-            android:paddingTop="@dimen/margin"
+            android:padding="@dimen/margin"
             android:text="查询"
             android:textColor="@color/selector_green_text"/>
     </LinearLayout>
@@ -191,7 +190,7 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/passenger_by_count"
             android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:inputType="text"
             android:lines="1"
@@ -260,12 +259,14 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/passenger_remark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="top|left"
             android:hint="@string/mark_input"
             android:inputType="textMultiLine"
             android:lines="3"
-            android:maxLength="150"/>
+            android:maxLength="150"
+            android:paddingBottom="@dimen/margin_b"
+            android:paddingTop="@dimen/margin_b"/>
     </LinearLayout>
 
     <View style="@style/divider_line_1px"/>
