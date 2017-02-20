@@ -14,9 +14,8 @@ import java.io.FileReader
  */
 object CrashHelper {
 
-    fun uploadCrash(content: String, result: (uploadStatus: Boolean) -> Unit) {
-        var crash = Crash()
-        crash.crash = content
+    fun uploadCrash(json: String, result: (uploadStatus: Boolean) -> Unit) {
+        var crash = Crash.parseJson(json)
         crash.save(object : SaveListener<String?>() {
             override fun done(p0: String?, p1: BmobException?) {
                 result.invoke(p1 == null)
@@ -31,12 +30,8 @@ object CrashHelper {
         var dir = File(LocalStorage.composeCrashFileDir().toString())
         val files = dir.listFiles()
         files?.forEach { file ->
-            var listContent = BufferedReader(FileReader(file)).readLines()
-            var content = ""
-            listContent.forEach { line ->
-                content = "$content\n$line"
-            }
-            uploadCrash(content, { result ->
+            var json = BufferedReader(FileReader(file)).readText()
+            uploadCrash(json, { result ->
                 if (result) {
                     file.delete()
                 }

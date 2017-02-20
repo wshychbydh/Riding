@@ -1,17 +1,12 @@
 package cool.eye.ridding.crash
 
-import android.os.Build
 import android.os.Process
 import android.util.Log
-import cn.bmob.v3.BmobUser
 import cool.eye.ridding.BuildConfig
-import cool.eye.ridding.login.model.UserModel
 import cool.eye.ridding.zone.helper.LocalStorage
 import java.io.BufferedWriter
 import java.io.FileWriter
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * CrashHandler
@@ -40,37 +35,40 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
         var writer: BufferedWriter? = null
         try {
             writer = BufferedWriter(FileWriter(LocalStorage.createCrashFile(), true))
-
-            //用户信息
-            val currentUser = BmobUser.getCurrentUser(UserModel::class.java)
-            if (currentUser != null) {
-                writer.write("UserId： ${currentUser.objectId}")
-            }
-
-            // 版本
-            writer.write("Version: " + BuildConfig.VERSION_NAME)
-            writer.newLine()
-            writer.write("Build: " + BuildConfig.VERSION_CODE)
-            writer.newLine()
-
-            // 硬件
-            writer.write("Android: " + Build.VERSION.RELEASE)
-            writer.newLine()
-            writer.write("CPU ABI: " + Build.CPU_ABI)
-            writer.newLine()
-            writer.write("Vendor: " + Build.MANUFACTURER)
-            writer.newLine()
-            writer.write("MODEL: " + Build.MODEL)
-            writer.newLine()
-
-            // 时间
-            val format = SimpleDateFormat(PATTERN, Locale.CHINA)
-            writer.write("Date: " + format.format(Date()))
-            writer.newLine()
-
-            // 堆栈信息
-            writer.write(Log.getStackTraceString(ex))
-            writer.newLine()
+            var crash = Crash()
+            crash.content = Log.getStackTraceString(ex)
+            writer.write(crash.toJson())
+//
+//            //用户信息
+//            val currentUser = BmobUser.getCurrentUser(UserModel::class.java)
+//            if (currentUser != null) {
+//                writer.write("UserId： ${currentUser.objectId}")
+//            }
+//
+//            // 版本
+//            writer.write("Version: " + BuildConfig.VERSION_NAME)
+//            writer.newLine()
+//            writer.write("Build: " + BuildConfig.VERSION_CODE)
+//            writer.newLine()
+//
+//            // 硬件
+//            writer.write("Android: " + Build.VERSION.RELEASE)
+//            writer.newLine()
+//            writer.write("CPU ABI: " + Build.CPU_ABI)
+//            writer.newLine()
+//            writer.write("Vendor: " + Build.MANUFACTURER)
+//            writer.newLine()
+//            writer.write("MODEL: " + Build.MODEL)
+//            writer.newLine()
+//
+//            // 时间
+//            val format = SimpleDateFormat(PATTERN, Locale.CHINA)
+//            writer.write("Date: " + format.format(Date()))
+//            writer.newLine()
+//
+//            // 堆栈信息
+//            writer.write(Log.getStackTraceString(ex))
+//            writer.newLine()
 
         } catch (e: IOException) {
             e.printStackTrace()
