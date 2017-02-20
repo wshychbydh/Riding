@@ -30,7 +30,7 @@ object CrashHelper {
         }
         var dir = File(LocalStorage.composeCrashFileDir().toString())
         val files = dir.listFiles()
-        files.forEach { file ->
+        files?.forEach { file ->
             var listContent = BufferedReader(FileReader(file)).readLines()
             var content = ""
             listContent.forEach { line ->

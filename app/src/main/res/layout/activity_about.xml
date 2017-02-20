@@ -5,15 +5,16 @@
     android:id="@+id/activity_about"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="cool.eye.ridding.zone.about.AboutActivity">
 
     <include layout="@layout/common_title"/>
-
     <TextView
         android:id="@+id/tv_about_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textSize="@dimen/content_b"
         android:autoLink="email"
         android:lineSpacingExtra="@dimen/padding_m"
         android:padding="@dimen/margin_large"/>

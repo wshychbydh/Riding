@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cn.bmob.v3.BmobUser
+import cn.bmob.v3.update.BmobUpdateAgent
 import cn.sudiyi.app.client.account.page.FeedbackActivity
+import cool.eye.ridding.BuildConfig
 import cool.eye.ridding.R
 import cool.eye.ridding.login.model.UserModel
 import cool.eye.ridding.login.ui.LoginActivity
@@ -31,6 +33,7 @@ class UserZoneFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        app_version.text = "当前版本: v${BuildConfig.VERSION_NAME}"
         fillUserInfo()
         setting.setOnClickListener { startActivityForResult(Intent(activity, UserInfoActivity::class.java), 1001) }
         card.setOnClickListener { startActivity(Intent(activity, CardActivity::class.java)) }
@@ -40,6 +43,7 @@ class UserZoneFragment : Fragment() {
         password_modify.setOnClickListener { startActivity(Intent(activity, SetPasswordActivity::class.java)) }
         feedback.setOnClickListener { startActivity(Intent(activity, FeedbackActivity::class.java)) }
         about.setOnClickListener { startActivity(Intent(activity, AboutActivity::class.java)) }
+        check_update.setOnClickListener {  BmobUpdateAgent.update(context) }
         logout.setOnClickListener {
             BmobUser.logOut()
             startActivity(Intent(activity, LoginActivity::class.java))

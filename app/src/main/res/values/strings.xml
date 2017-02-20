@@ -17,6 +17,7 @@
     <string name="account_register">注册</string>
     <string name="account_login_success">登录成功</string>
     <string name="account_register_success">注册成功</string>
+    <string name="account_check_update">检查更新</string>
     <string name="account_about">关于</string>
     <string name="account_feedback">意见反馈</string>
     <string name="account_feedback_type">意见类型</string>
