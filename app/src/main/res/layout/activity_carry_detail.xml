@@ -9,22 +9,20 @@
     <TextView
         android:id="@+id/people_total"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="20dp"/>
+        android:textSize="@dimen/title_s"/>
 
     <RelativeLayout
-        android:id="@+id/carry_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
         android:background="@color/white"
         android:orientation="vertical"
-        android:padding="@dimen/margin"
-        android:visibility="gone">
+        android:padding="@dimen/margin">
 
         <TextView
             android:id="@+id/carry_address"
@@ -76,6 +74,7 @@
             android:id="@+id/carry_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin"
             android:background="@color/white"/>
 
         <cool.eye.ridding.ui.EmptyView

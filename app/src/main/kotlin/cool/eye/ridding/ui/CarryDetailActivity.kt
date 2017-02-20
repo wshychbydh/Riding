@@ -66,7 +66,6 @@ class CarryDetailActivity : BaseActivity() {
     }
 
     fun showCarryInfo() {
-        carry_layout.visibility = View.VISIBLE
         carry_address.text = carryInfo.composeAddress()
         carry_time.text = carryInfo.goOffTime
         carry_price.text = carryInfo.composePrice()
@@ -78,7 +77,7 @@ class CarryDetailActivity : BaseActivity() {
 
     fun updatePeopleCount(ridingList: MutableList<Riding>?) {
         var peopleCount = 0
-        ridingList?.forEach { riding -> peopleCount = +riding.peopleCount }
+        ridingList?.forEach { riding -> peopleCount += riding.peopleCount }
         var content = "预载 ${carryInfo.peopleCount} 人，实载 $peopleCount 人"
         var color = resources.getColor(R.color.orange)
         people_total.text = Utils.formatColorOfStr(content, color, 10, 11)
