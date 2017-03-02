@@ -11,8 +11,10 @@ class SQLiteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
     companion object {
         const val PASSENGER = "passenger"
-        const val BLACK_LIST = "black_list"
+        const val BLACK_LIST_SHARE = "blacklist_share"
+        const val BLACK_LIST = "blacklist"
         const val PHONE = "phone"
+        const val USER_ID = "userId" //用户ID
         const val DATA = "data"
     }
 
@@ -28,10 +30,12 @@ class SQLiteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
     private fun removeAllTables(db: SQLiteDatabase) {
         db.execSQL("DROP TABLE IF EXISTS $PASSENGER")
         db.execSQL("DROP TABLE IF EXISTS $BLACK_LIST")
+        db.execSQL("DROP TABLE IF EXISTS $BLACK_LIST_SHARE")
     }
 
     fun createTables(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS $PASSENGER ( $PHONE VARCHAR(11) PRIMARY KEY NOT NULL , $DATA TEXT NOT NULL)")
-        db.execSQL("CREATE TABLE IF NOT EXISTS $BLACK_LIST ( $PHONE VARCHAR(11) PRIMARY KEY NOT NULL , $DATA TEXT NULL)")
+        db.execSQL("CREATE TABLE IF NOT EXISTS $PASSENGER ( $PHONE VARCHAR(11) PRIMARY KEY NOT NULL , $USER_ID VARCHAR(100) NOT NULL, $DATA TEXT NOT NULL)")
+        db.execSQL("CREATE TABLE IF NOT EXISTS $BLACK_LIST ( $PHONE VARCHAR(11) PRIMARY KEY NOT NULL , $USER_ID VARCHAR(100) NOT NULL, $DATA TEXT NOT NULL)")
+        db.execSQL("CREATE TABLE IF NOT EXISTS $BLACK_LIST_SHARE ( $PHONE VARCHAR(11) PRIMARY KEY NOT NULL , $DATA TEXT NOT NULL)")
     }
 }

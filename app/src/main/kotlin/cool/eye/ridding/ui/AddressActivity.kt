@@ -48,6 +48,7 @@ class AddressActivity : BaseActivity() {
         query.order("-carryCount,-ridingCount")
         query.findObjects(object : FindListener<Address>() {
             override fun done(p0: MutableList<Address>?, p1: BmobException?) {
+                if (isFinishing) return
                 stopProgressDialog()
                 if (p0?.isNotEmpty() ?: false) {
                     refreshView.onLoadData(p0!!)

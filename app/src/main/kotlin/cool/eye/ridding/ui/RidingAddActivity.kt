@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.Toast
 import cn.bmob.v3.BmobQuery
+import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import cn.bmob.v3.listener.SaveListener
@@ -61,7 +62,7 @@ class RidingAddActivity : BaseActivity() {
                 ridding_time.text = time
             }
             dialog.currentTime = ridding_time.text.toString()
-            dialog.show(supportFragmentManager,null)
+            dialog.show(supportFragmentManager, null)
         }
         start_address_common.setOnClickListener {
             setAddress(start_address)
@@ -77,6 +78,7 @@ class RidingAddActivity : BaseActivity() {
             passenger_notice.visibility = View.GONE
             var query = BmobQuery<Passenger>()
             query.addWhereEqualTo("phone", phone)
+            query.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
             query.findObjects(object : FindListener<Passenger>() {
                 override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
                     stopProgressDialog()
@@ -196,20 +198,21 @@ class RidingAddActivity : BaseActivity() {
     fun saveData(riding: Riding) {
         if (riding.passenger!!.objectId == null) {
             startProgressDialog()
-            riding.passenger!!.save(object : SaveListener<String?>() {
-                override fun done(p0: String?, p1: BmobException?) {
+            var bmobQuery = BmobQuery<Passenger>()
+            bmobQuery.addWhereEqualTo("phone", riding.passenger!!.phone)
+            bmobQuery.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
+            bmobQuery.findObjects(object : FindListener<Passenger>() {
+                override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
                     if (p1 == null) {
+                        riding.passenger!!.objectId = p0!![0].objectId
+                        riding.passenger!!.promise_not = p0[0].promise_not
+                        riding.passenger!!.by_count = p0[0].by_count + 1
+                        updatePassenger(riding.passenger!!)
                         saveRiding(riding)
                     } else {
-                        var bmobQuery = BmobQuery<Passenger>()
-                        bmobQuery.addWhereEqualTo("phone", riding.passenger!!.phone)
-                        bmobQuery.findObjects(object : FindListener<Passenger>() {
-                            override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
+                        riding.passenger!!.save(object : SaveListener<String?>() {
+                            override fun done(p0: String?, p1: BmobException?) {
                                 if (p1 == null) {
-                                    riding.passenger!!.objectId = p0!![0].objectId
-                                    riding.passenger!!.promise_not = p0[0].promise_not
-                                    riding.passenger!!.by_count = p0[0].by_count + 1
-                                    updatePassenger(riding.passenger!!)
                                     saveRiding(riding)
                                 } else {
                                     stopProgressDialog()

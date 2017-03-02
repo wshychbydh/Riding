@@ -1,6 +1,7 @@
 package cool.eye.ridding.zone.contacts
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import cn.bmob.v3.BmobQuery
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
+import cn.bmob.v3.listener.UpdateListener
 import cool.eye.ridding.R
 import cool.eye.ridding.data.Passenger
 import cool.eye.ridding.data.SEX
@@ -48,7 +50,8 @@ class PassengerFragment : BaseFragment() {
             getPassengers(type)
         } else {
             var result = kotlin.run {
-                if (type == BLACK_LIST) DBHelper.get(context).getBlackList() else DBHelper.get(context).getPassengers()
+                if (type == BLACK_LIST) DBHelper.get(context).getBlackList(BmobUser.getCurrentUser().objectId)
+                else DBHelper.get(context).getPassengers(BmobUser.getCurrentUser().objectId)
             }
             refreshView.onLoadData(result)
         }
@@ -67,6 +70,7 @@ class PassengerFragment : BaseFragment() {
         query.order("-by_count,-promise_not,updatedAt")
         query.findObjects(object : FindListener<Passenger>() {
             override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
+                if (context == null) return
                 if (p0?.isNotEmpty() ?: false) {
                     Thread(Runnable {
                         if (type == BLACK_LIST) {
@@ -75,7 +79,7 @@ class PassengerFragment : BaseFragment() {
                             DBHelper.get(context).savePassengers(p0!!)
                         }
                     }).start()
-                    refreshView.onLoadData(p0!!)
+                    refreshView?.onLoadData(p0!!)
                 }
                 stopProgressDialog()
             }
@@ -97,11 +101,29 @@ class PassengerFragment : BaseFragment() {
             holder.view.passenger_job.text = passenger.job
             holder.view.passenger_remark.text = passenger.remark
             holder.view.passenger_remark.visibility = if (passenger.remark.isNullOrEmpty()) View.GONE else View.VISIBLE
-            holder.view.setOnClickListener {
+
+            holder.view.passenger_item_call.setOnClickListener {
                 Utils.callPhone(context, passenger.phone)
             }
-            holder.view.setOnLongClickListener {
+
+            holder.view.setOnClickListener {
                 PassengerAddActivity.launch(activity, passenger)
+            }
+            holder.view.setOnLongClickListener {
+                AlertDialog.Builder(context).setMessage("确定要删除联系人吗?")
+                        .setPositiveButton(resources.getString(R.string.delete), { dialog, which ->
+                            passenger.delete(object : UpdateListener() {
+                                override fun done(p0: BmobException?) {
+                                    if (p0 != null) {
+                                        toast(getString(R.string.delete_succeed))
+                                        passengers.remove(passenger)
+                                        notifyDataSetChanged()
+                                    }
+                                }
+                            })
+                        })
+                        .setNegativeButton(resources.getString(R.string.cancel), null)
+                        .show()
                 false
             }
         }

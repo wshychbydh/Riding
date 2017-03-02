@@ -344,11 +344,11 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/riding_mark"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="top|left"
                     android:hint="@string/mark_input"
                     android:inputType="textMultiLine"
-                    android:lines="3"
+                    android:maxLines="3"
                     android:maxLength="150"
                     android:paddingBottom="@dimen/margin_b"
                     android:paddingTop="@dimen/margin_b"/>

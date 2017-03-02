@@ -44,6 +44,7 @@ class CarryFragment : BaseFragment() {
         query.order("-updatedAt,-createdAt")
         query.findObjects(object : FindListener<CarryInfo>() {
             override fun done(p0: MutableList<CarryInfo>?, p1: BmobException?) {
+                if (context == null) return
                 if (p1 == null) {
                     if (p0?.isNotEmpty() ?: false) {
                         refreshView.onLoadData(p0!!)

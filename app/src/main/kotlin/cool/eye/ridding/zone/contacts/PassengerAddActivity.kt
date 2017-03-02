@@ -3,9 +3,11 @@ package cool.eye.ridding.zone.contacts
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import cn.bmob.v3.BmobQuery
+import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import cn.bmob.v3.listener.SaveListener
@@ -51,6 +53,7 @@ class PassengerAddActivity : BaseActivity() {
             startProgressDialog()
             var query = BmobQuery<Passenger>()
             query.addWhereEqualTo("phone", phone)
+            query.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
             query.findObjects(object : FindListener<Passenger>() {
                 override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
                     stopProgressDialog()
@@ -61,6 +64,11 @@ class PassengerAddActivity : BaseActivity() {
                 }
             })
         }
+
+        radiogroup_blacklist.setOnCheckedChangeListener { group, checkedId ->
+            black_list_share.visibility = if (group.indexOfChild(group.findViewById(checkedId)) == 1)
+                View.VISIBLE else View.INVISIBLE
+        }
     }
 
     fun fillPassenger() {
@@ -69,7 +77,9 @@ class PassengerAddActivity : BaseActivity() {
         (radiogroup_sex.getChildAt(passenger!!.sex) as RadioButton).isChecked = true
         passenger_age.setText(passenger!!.age)
         passenger_phone.setText(passenger!!.phone)
-        (radiogroup_blacklist.getChildAt(if (passenger!!.promise_not > 0) 1 else 0) as RadioButton).isChecked = true
+        var blackList = passenger!!.promise_not > 0
+        (radiogroup_blacklist.getChildAt(if (blackList) 1 else 0) as RadioButton).isChecked = true
+        black_list_share.visibility = if (blackList) View.VISIBLE else View.INVISIBLE
         passenger_remark.setText(passenger!!.remark)
     }
 
@@ -90,6 +100,8 @@ class PassengerAddActivity : BaseActivity() {
             return
         }
 
+        var blackList = radiogroup_blacklist.indexOfChild(radiogroup_blacklist.findViewById(radiogroup_blacklist.checkedRadioButtonId)) == 1
+
         if (passenger == null) passenger = Passenger()
         passenger!!.name = name
         passenger!!.sex = sex
@@ -98,34 +110,40 @@ class PassengerAddActivity : BaseActivity() {
         passenger!!.phone = phone
         var byCount = passenger_by_count.text.trim().toString()
         passenger!!.by_count = if (byCount.isNullOrEmpty()) 0 else byCount.toInt()
-        var blackList = radiogroup_blacklist.indexOfChild(radiogroup_blacklist.findViewById(radiogroup_blacklist.checkedRadioButtonId))
-        passenger!!.promise_not = if (blackList == 1) 1 else 0
+        passenger!!.promise_not = if (blackList) 1 else 0
         passenger!!.remark = passenger_remark.text.trim().toString()
         savePassenger()
+        saveBlackList()
+    }
+
+    fun saveBlackList() {
+        if (black_list_share.isChecked) {
+            PassengerUtils.saveBlackList(passenger!!)
+        }
     }
 
     fun savePassenger() {
         startProgressDialog()
         DBHelper.get(this).savePassenger(passenger!!)
         if (passenger!!.objectId == null) {
-            passenger!!.save(object : SaveListener<String?>() {
-                override fun done(p0: String?, p1: BmobException?) {
+            var bmobQuery = BmobQuery<Passenger>()
+            bmobQuery.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
+            bmobQuery.addWhereEqualTo("phone", passenger!!.phone)
+            bmobQuery.findObjects(object : FindListener<Passenger>() {
+                override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
                     if (p1 == null) {
-                        stopProgressDialog()
-                        setResult(1001)
-                        finish()
+                        passenger!!.objectId = p0!![0].objectId
+                        passenger!!.promise_not += p0[0].promise_not
+                        passenger!!.by_count += p0[0].by_count
+                        updatePassenger()
                     } else {
-                        var bmobQuery = BmobQuery<Passenger>()
-                        bmobQuery.addWhereEqualTo("phone", passenger!!.phone)
-                        bmobQuery.findObjects(object : FindListener<Passenger>() {
-                            override fun done(p0: MutableList<Passenger>?, p1: BmobException?) {
+                        passenger!!.save(object : SaveListener<String?>() {
+                            override fun done(p0: String?, p1: BmobException?) {
                                 if (p1 == null) {
-                                    passenger!!.objectId = p0!![0].objectId
-                                    passenger!!.promise_not += p0[0].promise_not
-                                    passenger!!.by_count += p0[0].by_count
-                                    updatePassenger()
-                                } else {
                                     stopProgressDialog()
+                                    setResult(1001)
+                                    finish()
+                                } else {
                                     toast(p1.message ?: "")
                                 }
                             }

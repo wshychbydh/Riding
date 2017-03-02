@@ -2,6 +2,7 @@ package cool.eye.ridding.db
 
 import android.content.ContentValues
 import android.content.Context
+import cool.eye.ridding.data.BlackList
 import cool.eye.ridding.data.Passenger
 import java.util.*
 
@@ -16,7 +17,7 @@ class DBHelper {
         lateinit internal var sqlite_helper: SQLiteHelper
         internal var helper: DBHelper? = null
 
-        fun get(context: Context): DBHelper {
+        @JvmStatic fun get(context: Context): DBHelper {
             if (helper == null) {
                 init(context)
             }
@@ -34,6 +35,7 @@ class DBHelper {
     fun savePassenger(passenger: Passenger) {
         val database = sqlite_helper.writableDatabase
         var values = ContentValues()
+        values.put(SQLiteHelper.USER_ID, passenger.userId)
         values.put(SQLiteHelper.PHONE, passenger.phone)
         values.put(SQLiteHelper.DATA, Passenger.toJson(passenger))
         database.insert(SQLiteHelper.PASSENGER, null, values)
@@ -45,6 +47,7 @@ class DBHelper {
         database.beginTransaction()
         passengers.filterNotNull().forEach { passenger ->
             var values = ContentValues()
+            values.put(SQLiteHelper.USER_ID, passenger.userId)
             values.put(SQLiteHelper.PHONE, passenger.phone)
             values.put(SQLiteHelper.DATA, Passenger.toJson(passenger))
             database.insert(SQLiteHelper.PASSENGER, null, values)
@@ -56,10 +59,19 @@ class DBHelper {
     fun saveBlackList(blackList: Passenger) {
         val database = sqlite_helper.writableDatabase
         var values = ContentValues()
+        values.put(SQLiteHelper.USER_ID, blackList.userId)
         values.put(SQLiteHelper.PHONE, blackList.phone)
         values.put(SQLiteHelper.DATA, Passenger.toJson(blackList))
         database.insert(SQLiteHelper.BLACK_LIST, null, values)
     }
+
+//    fun saveShareBlackList(blackList: BlackList) {
+//        val database = sqlite_helper.writableDatabase
+//        var values = ContentValues()
+//        values.put(SQLiteHelper.PHONE, blackList.phone)
+//        values.put(SQLiteHelper.DATA, BlackList.toJson(blackList))
+//        database.insert(SQLiteHelper.BLACK_LIST_SHARE, null, values)
+//    }
 
     fun saveBlackList(blackList: MutableList<Passenger>) {
         clearBlackList()
@@ -67,6 +79,7 @@ class DBHelper {
         database.beginTransaction()
         blackList.filterNotNull().forEach { passenger ->
             var values = ContentValues()
+            values.put(SQLiteHelper.USER_ID, passenger.userId)
             values.put(SQLiteHelper.PHONE, passenger.phone)
             values.put(SQLiteHelper.DATA, Passenger.toJson(passenger))
             database.insert(SQLiteHelper.BLACK_LIST, null, values)
@@ -75,9 +88,23 @@ class DBHelper {
         database.endTransaction()
     }
 
-    fun getPassengers(): List<Passenger> {
+    fun saveShareBlackList(blackList: MutableList<BlackList>) {
+        clearBlackList()
+        val database = sqlite_helper.writableDatabase
+        database.beginTransaction()
+        blackList.filterNotNull().forEach { blackList ->
+            var values = ContentValues()
+            values.put(SQLiteHelper.PHONE, blackList.phone)
+            values.put(SQLiteHelper.DATA, BlackList.toJson(blackList))
+            database.insert(SQLiteHelper.BLACK_LIST_SHARE, null, values)
+        }
+        database.setTransactionSuccessful()
+        database.endTransaction()
+    }
+
+    fun getPassengers(userId: String): List<Passenger> {
         val database = sqlite_helper.readableDatabase
-        val cursor = database.query(SQLiteHelper.PASSENGER, null, null, null, null, null, null)
+        val cursor = database.query(SQLiteHelper.PASSENGER, null, "${SQLiteHelper.USER_ID}=?", arrayOf(userId), null, null, null)
         if (cursor != null && cursor.count > 0) {
             var passengers = ArrayList<Passenger>()
             while (cursor.moveToNext()) {
@@ -89,9 +116,9 @@ class DBHelper {
         return listOf()
     }
 
-    fun getBlackList(): List<Passenger> {
+    fun getBlackList(userId: String): List<Passenger> {
         val database = sqlite_helper.readableDatabase
-        val cursor = database.query(SQLiteHelper.BLACK_LIST, null, null, null, null, null, null)
+        val cursor = database.query(SQLiteHelper.BLACK_LIST, null, "${SQLiteHelper.USER_ID}=?", arrayOf(userId), null, null, null)
         if (cursor != null && cursor.count > 0) {
             var passengers = ArrayList<Passenger>()
             while (cursor.moveToNext()) {
@@ -103,9 +130,24 @@ class DBHelper {
         return listOf()
     }
 
-    fun getBlackListByPhone(phone: String): Passenger? {
+    fun getShareBlackList(): List<BlackList> {
         val database = sqlite_helper.readableDatabase
-        val cursor = database.query(SQLiteHelper.BLACK_LIST, null, "${SQLiteHelper.PHONE}=$phone", null, null, null, null)
+        val cursor = database.query(SQLiteHelper.BLACK_LIST_SHARE, null, null, null, null, null, null)
+        if (cursor != null && cursor.count > 0) {
+            var blackList = ArrayList<BlackList>()
+            while (cursor.moveToNext()) {
+                var data = cursor.getString(cursor.getColumnIndex(SQLiteHelper.DATA))
+                blackList.add(BlackList.parseJson(data))
+            }
+            return blackList
+        }
+        return listOf()
+    }
+
+    fun getBlackListByPhone(phone: String, userId: String?): Passenger? {
+        if (userId == null) return null
+        val database = sqlite_helper.readableDatabase
+        val cursor = database.query(SQLiteHelper.BLACK_LIST, null, "${SQLiteHelper.USER_ID}=? and ${SQLiteHelper.PHONE}=?", arrayOf(userId, phone), null, null, null)
         if (cursor != null && cursor.count > 0) {
             cursor.moveToFirst()
             return Passenger.parseJson(cursor.getString(cursor.getColumnIndex(SQLiteHelper.DATA)))
@@ -113,9 +155,20 @@ class DBHelper {
         return null
     }
 
-    fun getPassengerByPhone(phone: String): Passenger? {
+    fun getShareBlackListByPhone(phone: String): BlackList? {
         val database = sqlite_helper.readableDatabase
-        val cursor = database.query(SQLiteHelper.PASSENGER, null, "${SQLiteHelper.PHONE}=$phone", null, null, null, null)
+        val cursor = database.query(SQLiteHelper.BLACK_LIST_SHARE, null, "${SQLiteHelper.PHONE}=?", arrayOf(phone), null, null, null)
+        if (cursor != null && cursor.count > 0) {
+            cursor.moveToFirst()
+            return BlackList.parseJson(cursor.getString(cursor.getColumnIndex(SQLiteHelper.DATA)))
+        }
+        return null
+    }
+
+    fun getPassengerByPhone(phone: String, userId: String?): Passenger? {
+        if (userId == null) return null
+        val database = sqlite_helper.readableDatabase
+        val cursor = database.query(SQLiteHelper.PASSENGER, null, "${SQLiteHelper.USER_ID}=? and ${SQLiteHelper.PHONE}=?", arrayOf(userId, phone), null, null, null)
         if (cursor != null && cursor.count > 0) {
             cursor.moveToFirst()
             return Passenger.parseJson(cursor.getString(cursor.getColumnIndex(SQLiteHelper.DATA)))

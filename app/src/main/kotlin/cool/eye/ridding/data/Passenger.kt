@@ -13,6 +13,7 @@ class Passenger : BaseBmobObject() {
     var promise_not: Int = 0//不守信次数
     var by_count = 0 //乘坐次数
     var job: String = ""
+    var share: Boolean = false
     var remark = ""
 
     companion object {
@@ -27,27 +28,25 @@ class Passenger : BaseBmobObject() {
         }
     }
 
-    override fun toString(): String {
-        return "Passenger(age='$age', name='$name', phone='$phone', sex=$sex, promise_not=$promise_not, by_count=$by_count, job='$job', remark='$remark')"
-    }
-
     fun blackList(): String {
-        return "黑名单=>$name \n备注：$remark"
-    }
 
-    fun call(): String {
-        if (remark.isNullOrEmpty()){
-            return "乘客去电=>$name"
+        if (remark.isNullOrEmpty()) {
+            return "黑名单=>$name"
         } else {
-            return "乘客去电=>$name\n备注：$remark"
+            return "黑名单=>$name\n备注：$remark"
         }
     }
 
-    fun receive(): String {
-        if (remark.isNullOrEmpty()){
-            return "乘客来电=>$name"
+    fun passenger(): String {
+        if (remark.isNullOrEmpty()) {
+            return "乘客=>$name"
         } else {
-            return "乘客来电=>$name\n备注：$remark"
+            return "乘客=>$name\n备注：$remark"
         }
     }
+
+    override fun toString(): String {
+        return "Passenger(age='$age', name='$name', phone='$phone', sex=$sex, promise_not=$promise_not, by_count=$by_count, job='$job', share=$share, remark='$remark')"
+    }
+
 }

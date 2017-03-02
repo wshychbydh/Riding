@@ -72,7 +72,7 @@ class UserInfoActivity : PhotoActivity() {
                         setResult(1001)
                         finish()
                     } else {
-                        toast(p0?.message ?: getString(R.string.unknow_error))
+                        toast(p0.message ?: getString(R.string.unknow_error))
                     }
                 })
             } else {
@@ -83,11 +83,11 @@ class UserInfoActivity : PhotoActivity() {
 
     fun getModifyUser(): UserModel {
         var user = UserModel()
-        if (!userinfo_nickname.text.toString().equals(userModel.nickname)) {
+        if (!userinfo_nickname.text.isNullOrEmpty() &&  !userinfo_nickname.text.trim().equals(userModel.nickname)) {
             user.nickname = userinfo_nickname.text.trim().toString()
             needUpdate = true
         }
-        if (userinfo_age.text.toString().toInt() != userModel.age) {
+        if (!userinfo_age.text.isNullOrEmpty() && userinfo_age.text.toString().toInt()!= userModel.age) {
             user.age = userinfo_age.text.trim().toString().toInt()
             needUpdate = true
         }

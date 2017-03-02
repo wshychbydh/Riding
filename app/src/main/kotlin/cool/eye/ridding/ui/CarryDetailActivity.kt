@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cn.bmob.v3.BmobQuery
+import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import cool.eye.ridding.R
@@ -49,10 +50,12 @@ class CarryDetailActivity : BaseActivity() {
         carry_recyclerview.addItemDecoration(DividerDecoration(this))
         startProgressDialog()
         var query = BmobQuery<Riding>()
+        query.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
         query.addWhereEqualTo("carryId", carryInfo.objectId)
         query.include("passenger")
         query.findObjects(object : FindListener<Riding>() {
             override fun done(p0: MutableList<Riding>?, p1: BmobException?) {
+                if (isFinishing) return
                 stopProgressDialog()
                 if (p1 == null && p0?.isNotEmpty() ?: false) {
                     carry_empty.visibility = View.GONE

@@ -62,6 +62,7 @@
             android:id="@+id/userinfo_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="点击输入昵称"
             android:maxLength="8"
             android:padding="@dimen/margin"/>
     </LinearLayout>

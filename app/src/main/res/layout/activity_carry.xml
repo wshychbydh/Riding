@@ -223,7 +223,7 @@
             android:gravity="top|left"
             android:hint="@string/mark_input"
             android:inputType="textMultiLine"
-            android:lines="3"
+            android:maxLines="3"
             android:maxLength="150"
             android:paddingBottom="@dimen/margin_b"
             android:paddingTop="@dimen/margin_b"/>

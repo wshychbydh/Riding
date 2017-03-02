@@ -220,8 +220,9 @@
 
         <RadioGroup
             android:id="@+id/radiogroup_blacklist"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <android.support.v7.widget.AppCompatRadioButton
@@ -237,6 +238,15 @@
                 android:text="是"
                 android:textColor="@color/content"/>
         </RadioGroup>
+
+        <Switch
+            android:id="@+id/black_list_share"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:text="共享"
+            android:textColor="@color/black"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <View style="@style/divider_line_1px"/>
@@ -259,11 +269,11 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/passenger_remark"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="top|left"
             android:hint="@string/mark_input"
             android:inputType="textMultiLine"
-            android:lines="3"
+            android:maxLines="3"
             android:maxLength="150"
             android:paddingBottom="@dimen/margin_b"
             android:paddingTop="@dimen/margin_b"/>

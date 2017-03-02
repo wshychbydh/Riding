@@ -70,6 +70,7 @@
     <string name="carry_update_succeed">更新车源成功</string>
     <string name="contacts">通讯录</string>
     <string name="black_list">黑名单</string>
+    <string name="black_list_share">共享黑名单</string>
     <string name="card_text">我的文本</string>
     <string name="card_image">我的名片</string>
     <string name="card_add">添加名片</string>
@@ -77,7 +78,9 @@
     <string name="logout">注销</string>
     <string name="mine">我的</string>
     <string name="passenger">乘客</string>
+    <string name="passenger_setting">乘客设置</string>
     <string name="by_count">已乘%1$d次</string>
+    <string name="blacklist_sign_count">被标记%1$d次</string>
     <string name="card_content_input">请输入名片内容</string>
     <string name="pick_share_method">选择分享方式</string>
 
@@ -89,7 +92,7 @@
     <string name="delete">删除</string>
     <string name="sure">确定</string>
     <string name="blacklist_add_succeed">已加入黑名单</string>
-    <string name="delect_succeed">删除成功</string>
+    <string name="delete_succeed">删除成功</string>
     <string name="car_submit_none">你还未发布车源信息</string>
     <string name="carry_finish_query">确定要完成该车源吗？</string>
     <string name="save">保存</string>

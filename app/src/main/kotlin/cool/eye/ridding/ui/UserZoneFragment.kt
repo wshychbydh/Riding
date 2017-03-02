@@ -11,6 +11,8 @@ import cn.bmob.v3.update.BmobUpdateAgent
 import cn.sudiyi.app.client.account.page.FeedbackActivity
 import cool.eye.ridding.BuildConfig
 import cool.eye.ridding.R
+import cool.eye.ridding.broadcast.GuardService
+import cool.eye.ridding.broadcast.ServiceUtil
 import cool.eye.ridding.login.model.UserModel
 import cool.eye.ridding.login.ui.LoginActivity
 import cool.eye.ridding.login.ui.SetPasswordActivity
@@ -46,6 +48,7 @@ class UserZoneFragment : Fragment() {
         check_update.setOnClickListener {  BmobUpdateAgent.update(context) }
         logout.setOnClickListener {
             BmobUser.logOut()
+            ServiceUtil.stopService(context,GuardService::class.java)
             startActivity(Intent(activity, LoginActivity::class.java))
             activity.finish()
         }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/windowBackground"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="@dimen/margin"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/padding_s"
+        android:text="通用设置"
+        android:textSize="@dimen/content_s"/>
+
+    <View
+        style="@style/divider_line_1px"/>
+
+    <Switch
+        android:id="@+id/call_monitor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:checked="true"
+        android:paddingBottom="@dimen/padding_s"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin"
+        android:paddingTop="@dimen/margin"
+        android:text="来电监听"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/margin"
+        android:paddingLeft="@dimen/margin"
+        android:text="推荐打开，有利于识别来/去电用户是否为乘客"
+        android:textColor="@color/deep_gray"
+        android:textSize="@dimen/font_s"/>
+
+    <View style="@style/divider_line_1px"/>
+
+    <View
+        style="@style/divider_line_1px"
+        android:layout_marginTop="@dimen/margin"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/padding_s"
+        android:paddingTop="@dimen/margin"
+        android:text="黑名单设置"
+        android:textSize="@dimen/content_s"/>
+
+    <View
+        style="@style/divider_line_1px"/>
+
+    <Switch
+        android:id="@+id/black_list_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:checked="false"
+        android:enabled="false"
+        android:paddingBottom="@dimen/padding_s"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin"
+        android:paddingTop="@dimen/margin"
+        android:text="黑名单来电拒绝"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/margin"
+        android:paddingLeft="@dimen/margin"
+        android:text="黑名单乘客来电时是否直接拒绝（暂不开放）"
+        android:textColor="@color/deep_gray"
+        android:textSize="@dimen/font_s"/>
+
+    <View style="@style/divider_line_1px"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_passenger_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:background="@drawable/bg_btn_border_green"
+        android:text="@string/save"
+        android:textColor="@color/white"/>
+</LinearLayout>

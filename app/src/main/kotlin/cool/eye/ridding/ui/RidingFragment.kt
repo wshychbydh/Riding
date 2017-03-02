@@ -50,6 +50,7 @@ class RidingFragment : BaseFragment() {
         query.order("-updatedAt,-createdAt")
         query.findObjects(object : FindListener<CarryInfo>() {
             override fun done(p0: MutableList<CarryInfo>?, p1: BmobException?) {
+                if (context == null) return
                 if (p0?.isNotEmpty() ?: false) {
                     carryInfo = p0!![0]
                     getRidingInfo()
@@ -116,10 +117,13 @@ class RidingFragment : BaseFragment() {
         riding_recyclerview.adapter = null
         riding_recyclerview.removeAllViews()
         var query = BmobQuery<Riding>()
-        query.addWhereEqualTo("goOffTime", carryInfo.goOffTime)
+        query.addWhereEqualTo("userId", BmobUser.getCurrentUser().objectId)
+        query.addWhereEqualTo("carryId", carryInfo.objectId)
+        //   query.addWhereEqualTo("goOffTime", carryInfo.goOffTime)
         query.include("passenger")
         query.findObjects(object : FindListener<Riding>() {
             override fun done(p0: MutableList<Riding>?, p1: BmobException?) {
+                if (context == null) return
                 stopProgressDialog()
                 if (p1 != null) {
                     toast(p1.message ?: "")
@@ -210,7 +214,7 @@ class RidingFragment : BaseFragment() {
 
             riding.deleteData(riding.objectId, object : DeleteDataListener {
                 override fun onSucceed() {
-                    toast(getString(R.string.delect_succeed))
+                    toast(getString(R.string.delete_succeed))
                     startProgressDialog()
                     getRidingInfo()
                 }

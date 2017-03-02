@@ -15,10 +15,11 @@ class ContactsActivity : BaseActivity() {
         //初始化数据库
         setContentView(R.layout.activity_contacts)
         iv_back.setOnClickListener { finish() }
-        iv_submit.setImageResource(R.drawable.add)
+        iv_submit.setImageResource(R.drawable.ic_setting)
         iv_submit.setOnClickListener {
-            PassengerAddActivity.launch(this, null)
+            startActivity(Intent(this, PassengerSettingActivity::class.java))
         }
+        passenger_add.setOnClickListener { PassengerAddActivity.launch(this, null) }
         tv_title.text = getString(R.string.contacts)
         loadContacts()
     }
@@ -31,6 +32,8 @@ class ContactsActivity : BaseActivity() {
         bundle = Bundle()
         bundle.putInt(PassengerFragment.PASSENGER_TYPE, PassengerFragment.BLACK_LIST)
         adapter.addTab(PassengerFragment::class.java, bundle, getString(R.string.black_list))
+        adapter.addTab(BlackListFragment::class.java, null, getString(R.string.black_list_share))
+        passenger_viewpager.offscreenPageLimit = 3
         passenger_viewpager.adapter = adapter
         contacts_pager_tabstrip.tabIndicatorColor = resources.getColor(R.color.orange)
         passenger_viewpager.currentItem = intent.getIntExtra(PassengerFragment.PASSENGER_TYPE, PassengerFragment.PASSENGER)
