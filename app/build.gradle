@@ -2,34 +2,51 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def signConfigFile = project.rootProject.file('local.properties')
+def hasSignConfig = false
+def localProps = new Properties()
+
+if (signConfigFile.exists()) {
+    localProps.load(project.rootProject.file(signConfigFile).newInputStream())
+    hasSignConfig = localProps['keystore.storeFile'] != null
+}
+
 android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.eye.cool.ridding"
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+        versionCode 2
+        versionName "1.0.2"
+    }
+
     signingConfigs {
         release {
-            keyAlias 'cooleye'
-            keyPassword 'cooleye'
-            storeFile file('/home/cool/cool/keystory/keystore.jks')
-            storePassword 'cooleye'
+            if (hasSignConfig) {
+                storeFile file(localProps['keystore.storeFile'])
+                storePassword localProps['keystore.storePassword']
+                keyAlias localProps['keystore.keyAlias']
+                keyPassword localProps['keystore.keyPassword']
+            }
+        }
+        debug {
+            storeFile file(project.rootProject.file('debug.keystore'))
+            storePassword 'android'
+            keyAlias 'alias'
+            keyPassword 'android'
         }
     }
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
-    //**兼容Android6.0系统所需，如果这句话报错，可在dependencies标签下使用compile 'cn.bmob.android:http-legacy:1.0'**
-    useLibrary 'org.apache.http.legacy'
-    defaultConfig {
-        applicationId "cool.eye.ridding"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.01"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.release
-    }
+
     buildTypes {
 
         debug {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            minifyEnabled true
+            minifyEnabled false
             useProguard false
         }
 
@@ -40,35 +57,22 @@ android {
             useProguard true
         }
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
+
+    useLibrary 'org.apache.http.legacy'
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-    productFlavors {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    compile 'com.android.support:recyclerview-v7:25.1.0'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
     //bmob
-    compile 'cn.bmob.android:bmob-sdk:3.5.0'
-    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
-    compile 'cn.bmob.android:http-legacy:1.0'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    testCompile 'junit:junit:4.12'
-    compile 'com.alibaba:fastjson:1.1.52.android'
-    compile 'com.facebook.fresco:fresco:0.12.0'
-    compile project(':scan')
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'cn.bmob.android:bmob-sdk:3.5.0'
+    implementation 'com.facebook.fresco:fresco:0.12.0'
+    implementation project(':scan')
 }
 repositories {
     mavenCentral()
