@@ -36,7 +36,7 @@ object LocalStorage {
     // create file storage dir
     @JvmStatic fun composeCrashFileDir(): StringBuilder {
         val sb = StringBuilder()
-        sb.append(android.os.Environment.getExternalStorageDirectory())
+        sb.append(Environment.getExternalStorageDirectory())
         sb.append(File.separator)
         sb.append(LOCAL_DIR)
         sb.append(File.separator)
@@ -61,7 +61,7 @@ object LocalStorage {
     // create image storage dir
     fun composeCardImageDir(): StringBuilder {
         val sb = StringBuilder()
-        sb.append(android.os.Environment.getExternalStorageDirectory())
+        sb.append(Environment.getExternalStorageDirectory())
         sb.append(File.separator)
         sb.append(LOCAL_DIR)
         sb.append(File.separator)
@@ -79,7 +79,7 @@ object LocalStorage {
     // create image storage dir
     fun composeQrImageDir(): StringBuilder {
         val sb = StringBuilder()
-        sb.append(android.os.Environment.getExternalStorageDirectory())
+        sb.append(Environment.getExternalStorageDirectory())
         sb.append(File.separator)
         sb.append(LOCAL_DIR)
         sb.append(File.separator)
@@ -97,7 +97,7 @@ object LocalStorage {
     // create image storage dir
     fun composePhotoImageDir(): StringBuilder {
         val sb = StringBuilder()
-        sb.append(android.os.Environment.getExternalStorageDirectory())
+        sb.append(Environment.getExternalStorageDirectory())
         sb.append(File.separator)
         sb.append(LOCAL_DIR)
         sb.append(File.separator)
@@ -137,12 +137,13 @@ object LocalStorage {
     @JvmStatic fun createCrashFile(): File {
         var dir = File(composeCrashFileDir().toString())
         if (!dir.exists()) dir.mkdirs()
-        var name: String
-        if (Looper.myLooper() == Looper.getMainLooper()) {
-            name = "MainThread_${System.currentTimeMillis()}$CRASH_SUFF"
+        var name: String = if (Looper.myLooper() == Looper.getMainLooper()) {
+            "MainThread_${System.currentTimeMillis()}$CRASH_SUFF"
         } else {
-            name = "ChildThread_${System.currentTimeMillis()}$CRASH_SUFF"
+            "ChildThread_${System.currentTimeMillis()}$CRASH_SUFF"
         }
-        return File(composeCrashFile(name))
+        val file =  File(composeCrashFile(name))
+        file.createNewFile()
+        return file
     }
 }

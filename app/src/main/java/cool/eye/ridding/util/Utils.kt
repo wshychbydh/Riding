@@ -1,34 +1,22 @@
 package cool.eye.ridding.util
 
-import android.app.Activity
-import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.Uri
-import android.net.wifi.WifiManager
-import android.os.Vibrator
-import android.telephony.TelephonyManager
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import cool.eye.ridding.R
 import java.io.File
 import java.lang.reflect.Field
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
-
 
 /**
  * Created by cool on 17-1-13.

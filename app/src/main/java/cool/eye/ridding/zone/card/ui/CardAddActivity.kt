@@ -3,18 +3,22 @@ package cool.eye.ridding.zone.card.ui
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.SeekBar
 import android.widget.Toast
+import com.eye.cool.photo.params.ImageParams
+import com.eye.cool.photo.support.OnSelectListener
+import com.eye.cool.photo.support.v4.PhotoDialogFragment
+import com.eye.cool.photo.utils.ImageUtil
 import cool.eye.ridding.R
+import cool.eye.ridding.util.ThreadUtil
 import cool.eye.ridding.zone.card.colorpicker.picker.ColorPicker
 import cool.eye.ridding.zone.card.db.DBHelper
 import cool.eye.ridding.zone.card.helper.CardHelper
-import cool.eye.ridding.zone.photo.PhotoActivity
-import cool.eye.ridding.zone.photo.PhotoDialog
 import kotlinx.android.synthetic.main.activity_card_add.*
 import kotlinx.android.synthetic.main.common_title.*
 
-class CardAddActivity : PhotoActivity() {
+class CardAddActivity : AppCompatActivity() {
     lateinit var bitmap: Bitmap
     var bgColor: Int = 0
     var fontColor: Int = 0
@@ -22,7 +26,7 @@ class CardAddActivity : PhotoActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_add)
-        iv_submit.setImageResource(R.drawable.share)
+        rightIv.setImageResource(R.drawable.share)
         bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         bgColor = resources.getColor(R.color.white)
         fontColor = resources.getColor(R.color.title)
@@ -46,7 +50,7 @@ class CardAddActivity : PhotoActivity() {
             }
         }
 
-        iv_submit.setOnClickListener {
+        rightIv.setOnClickListener {
             if (cardInfoAvailable()) {
                 DBHelper.saveCardInfo(this@CardAddActivity, et_card_content.text.toString())
                 CardHelper.shareMsg(this, et_card_content.text.toString().trim())
@@ -54,13 +58,26 @@ class CardAddActivity : PhotoActivity() {
         }
 
         image_select.setOnClickListener {
-            var dialog = PhotoDialog(this)
-            setITakePhoto(dialog.view.photoInterface)
-            dialog.view.setPhotoCallback { bitmap ->
-                this@CardAddActivity.bitmap = bitmap
-                image_select.setImageBitmap(bitmap)
-            }
-            dialog.show()
+            PhotoDialogFragment.Builder()
+                .requestCameraPermission(true)
+                .setImageParams(
+                    ImageParams.Builder()
+                        .setOutput(100, 100)
+                        .setCutAble(true)
+                        .setOnSelectListener(object : OnSelectListener {
+                            override fun onSelect(path: String) {
+                                ThreadUtil.sync({
+                                    ImageUtil.getBitmapFromFile(path)
+                                },{
+                                    bitmap = it ?: bitmap
+                                    image_select.setImageBitmap(bitmap)
+                                })
+                            }
+                        })
+                        .build()
+                )
+                .build()
+                .show(supportFragmentManager)
         }
 
         font_size_select.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -96,7 +113,7 @@ class CardAddActivity : PhotoActivity() {
         }
     }
 
-    fun cardInfoAvailable(): Boolean {
+    private fun cardInfoAvailable(): Boolean {
         val text = et_card_content.text.toString()
         if (text.isNullOrEmpty()) {
             Toast.makeText(this, getString(R.string.card_content_input), Toast.LENGTH_SHORT).show()

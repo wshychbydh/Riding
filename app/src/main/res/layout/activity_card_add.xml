@@ -79,15 +79,14 @@
                     android:layout_margin="@dimen/margin"
                     android:text="显示图片"/>
 
-                <cool.eye.ridding.widget.StatedImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/image_select"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/margin"
-                    android:background="@drawable/bg_btn_white"
-                    android:scaleType="center"
+                    android:scaleType="centerInside"
                     android:src="@drawable/image_select"/>
 
                 <cool.eye.ridding.widget.StatedImageView
@@ -97,8 +96,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/margin"
                     android:layout_toLeftOf="@id/image_select"
-                    android:background="@drawable/bg_btn_white"
-                    android:scaleType="center"
+                    android:scaleType="centerInside"
                     android:src="@drawable/color_select"/>
             </RelativeLayout>
 

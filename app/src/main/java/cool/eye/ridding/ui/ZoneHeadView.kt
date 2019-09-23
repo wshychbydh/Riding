@@ -38,7 +38,7 @@ class ZoneHeadView @JvmOverloads constructor(context: Context, attrs: AttributeS
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ZoneHeadView)
             val count = typedArray.indexCount
             var drawable: Drawable? = null
-            (0..count - 1)
+            (0 until count)
                     .map { typedArray.getIndex(it) }
                     .forEach {
                         if (it == R.styleable.ZoneHeadView_src) {
@@ -67,6 +67,13 @@ class ZoneHeadView @JvmOverloads constructor(context: Context, attrs: AttributeS
     fun setDrawable(drawable: Drawable, isCircleDrawable: Boolean) {
         this.isFillet = isCircleDrawable
         updateBitmap(drawable)
+        invalidate()
+    }
+
+    fun setBitmap(bitmap: Bitmap, isFillet: Boolean) {
+        this.bitmap = bitmap
+        this.isFillet = isFillet
+        invalidate()
     }
 
     private fun updateBitmap(drawable: Drawable) {

@@ -15,7 +15,7 @@ import java.util.List;
 public class CameraManager implements Camera.AutoFocusCallback, Camera.PreviewCallback {
 
 	private enum CameraState {
-		CLOSED, OPEN, PREVIEW;
+		CLOSED, OPEN, PREVIEW
 	}
 
 	private Camera mCamera;

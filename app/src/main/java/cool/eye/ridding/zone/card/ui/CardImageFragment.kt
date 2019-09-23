@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.eye.cool.photo.utils.ImageUtil
 import cool.eye.ridding.R
 import cool.eye.ridding.ui.BaseFragment
+import cool.eye.ridding.util.ThreadUtil
 import cool.eye.ridding.zone.card.helper.CardHelper
 import cool.eye.ridding.zone.helper.LocalStorage
 import kotlinx.android.synthetic.main.card_image_item.view.*
@@ -50,7 +52,11 @@ class CardImageFragment : BaseFragment() {
         }
 
         override fun onBindViewHolder(holder: CardHolder, position: Int) {
-            holder.view.draweeview.setImageURI("file://${images[position].path}")
+            ThreadUtil.sync({
+                ImageUtil.getBitmapFromFile("file://${images[position].path}")
+            },{
+                holder.view.cardIv.setImageBitmap(it)
+            })
             holder.view.setOnClickListener { CardHelper.shareImage(requireContext(), images[position]) }
             holder.view.setOnLongClickListener {
                 AlertDialog.Builder(requireContext())

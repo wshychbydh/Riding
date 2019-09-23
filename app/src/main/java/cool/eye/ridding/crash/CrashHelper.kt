@@ -31,11 +31,11 @@ object CrashHelper {
         val files = dir.listFiles()
         files?.forEach { file ->
             var json = BufferedReader(FileReader(file)).readText()
-            uploadCrash(json, { result ->
+            uploadCrash(json) { result ->
                 if (result) {
                     file.delete()
                 }
-            })
+            }
         }
     }
 }

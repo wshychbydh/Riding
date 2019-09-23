@@ -15,11 +15,10 @@ class ContactsActivity : BaseActivity() {
         //初始化数据库
         setContentView(R.layout.activity_contacts)
         iv_back.setOnClickListener { finish() }
-        iv_submit.setImageResource(R.drawable.ic_setting)
-        iv_submit.setOnClickListener {
-            startActivity(Intent(this, PassengerSettingActivity::class.java))
+        rightIv.setImageResource(R.drawable.add)
+        rightIv.setOnClickListener {
+            PassengerAddActivity.launch(this, null)
         }
-        passenger_add.setOnClickListener { PassengerAddActivity.launch(this, null) }
         tv_title.text = getString(R.string.contacts)
         loadContacts()
     }

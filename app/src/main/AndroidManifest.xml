@@ -39,6 +39,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -78,7 +79,7 @@
         <activity
             android:name=".zone.contacts.PassengerAddActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".zone.contacts.PassengerSettingActivity"/>
+<!--        <activity android:name=".zone.contacts.PassengerSettingActivity"/>-->
         <activity
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
@@ -88,36 +89,36 @@
         <activity android:name=".zone.userinfo.UserInfoActivity"/>
         <activity android:name=".zone.card.ui.ScanResultActivity"/>
 
-        <service
-            android:name=".broadcast.GuardService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":remote"/>
+<!--        <service-->
+<!--            android:name=".broadcast.GuardService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true"-->
+<!--            android:process=":remote"/>-->
 
-        <receiver
-            android:name=".broadcast.PhoneReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
-                <action android:name="android.intent.action.PHONE_STATE"/>
-            </intent-filter>
-        </receiver>
+<!--        <receiver-->
+<!--            android:name=".broadcast.PhoneReceiver"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter android:priority="1000">-->
+<!--                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>-->
+<!--                <action android:name="android.intent.action.PHONE_STATE"/>-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
 
-        <receiver
-            android:name=".broadcast.BootReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
-            <intent-filter android:priority="1000"><!-- 媒体加载 -->
-                <action android:name="android.intent.action.MEDIA_MOUNTED"/><!-- 开机启动 -->
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-                <action android:name="android.intent.action.PACKAGE_RESTARTED"/>
-                <category android:name="android.intent.category.HOME"/>
-            </intent-filter>
-        </receiver>
+<!--        <receiver-->
+<!--            android:name=".broadcast.BootReceiver"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true"-->
+<!--            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">-->
+<!--            <intent-filter android:priority="1000">&lt;!&ndash; 媒体加载 &ndash;&gt;-->
+<!--                <action android:name="android.intent.action.MEDIA_MOUNTED"/>&lt;!&ndash; 开机启动 &ndash;&gt;-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED"/>-->
+<!--                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
+<!--                <action android:name="android.intent.action.USER_PRESENT"/>-->
+<!--                <action android:name="android.intent.action.PACKAGE_RESTARTED"/>-->
+<!--                <category android:name="android.intent.category.HOME"/>-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
     </application>
 
 </manifest>

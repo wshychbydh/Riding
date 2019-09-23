@@ -5,30 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:fresco="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/draweeview"
+        android:id="@+id/qrcodeIv"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/margin"
-        fresco:actualImageScaleType="centerInside"
-        fresco:backgroundImage="@color/white"
-        fresco:fadeDuration="300"
-        fresco:failureImage="@drawable/image_error"
-        fresco:failureImageScaleType="centerInside"
-        fresco:placeholderImage="@drawable/card_placeholder"
-        fresco:placeholderImageScaleType="center"
-        fresco:pressedStateOverlayImage="@color/gray_transparent"
-        fresco:progressBarAutoRotateInterval="1000"
-        fresco:progressBarImage="@drawable/loading"
-        fresco:progressBarImageScaleType="centerInside"
-        fresco:retryImage="@drawable/refresh"
-        fresco:retryImageScaleType="centerCrop"
-        fresco:roundAsCircle="false"
-        fresco:roundingBorderColor="@color/orange"
-        fresco:roundingBorderWidth="1px"/>
+        android:layout_margin="@dimen/margin"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_decode"

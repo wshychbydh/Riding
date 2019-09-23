@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment
 import android.util.SparseArray
 import android.widget.RadioButton
 import cool.eye.ridding.R
-import cool.eye.ridding.broadcast.GuardService
-import cool.eye.ridding.broadcast.ServiceUtil
 import kotlinx.android.synthetic.main.activity_riding.*
 
 
@@ -18,7 +16,7 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ServiceUtil.startService(this, GuardService::class.java)
+       // ServiceUtil.startService(this, GuardService::class.java)
         initView(0)
     }
 

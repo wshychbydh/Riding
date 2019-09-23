@@ -27,7 +27,7 @@ class LoadingActivity : BaseActivity() {
             }
         }
         BmobUpdateAgent.update(this)
-        handler.sendEmptyMessageDelayed(0, 5000)
+        handler.sendEmptyMessageDelayed(0, 3000)
         CrashHelper.uploadAllCrash(this)
     }
 

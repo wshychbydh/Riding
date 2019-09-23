@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.eye.cool.photo.utils.ImageUtil
 import cool.eye.ridding.R
 import cool.eye.ridding.ui.BaseFragment
+import cool.eye.ridding.util.ThreadUtil
 import cool.eye.ridding.zone.card.helper.CardHelper
 import cooleye.scan.decode.DecodeHelper
 import cool.eye.ridding.zone.helper.LocalStorage
@@ -50,7 +52,11 @@ class QrCodeFragment : BaseFragment() {
         }
 
         override fun onBindViewHolder(holder: CardHolder, position: Int) {
-            holder.view.draweeview.setImageURI("file://${images[position].path}")
+            ThreadUtil.sync({
+                ImageUtil.getBitmapFromFile("file://${images[position].path}")
+            },{
+                holder.view.qrcodeIv.setImageBitmap(it)
+            })
             holder.view.setOnLongClickListener {
                 CardHelper.shareImage(requireContext(), images[position])
                 false

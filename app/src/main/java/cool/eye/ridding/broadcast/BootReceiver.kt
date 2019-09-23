@@ -21,10 +21,10 @@ android.intent.action.CONFIGURATION_CHANGED
 
 android.intent.action.TIME_TICK
  */
-class BootReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context?, intent: Intent?) {
-        println("接收到广播事件======>>" + intent?.action)
-        if (context != null &&  PassengerUtils.isPassengerMonitor(context))
-            ServiceUtil.startService(context, GuardService::class.java)
-    }
-}
+//class BootReceiver : BroadcastReceiver() {
+//    override fun onReceive(context: Context?, intent: Intent?) {
+//        println("接收到广播事件======>>" + intent?.action)
+//        if (context != null &&  PassengerUtils.isPassengerMonitor(context))
+//            ServiceUtil.startService(context, GuardService::class.java)
+//    }
+//}
