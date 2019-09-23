@@ -78,6 +78,7 @@ class ZoneHeadView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     private fun updateBitmap(drawable: Drawable) {
         bitmap = createFixedSizeImage((drawable as BitmapDrawable).bitmap)
+        invalidate()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

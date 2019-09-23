@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:apps="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
@@ -34,11 +33,11 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <cool.eye.ridding.ui.ZoneHeadView
+    <ImageView
       android:id="@+id/headIv"
       android:layout_width="90dp"
       android:layout_height="90dp"
-      apps:src="@mipmap/ic_launcher" />
+      android:src="@mipmap/ic_launcher" />
 
     <TextView
       android:id="@+id/user_name"
